@@ -1,0 +1,424 @@
+/*
+* Skeleton V2.0.4
+* Copyright 2014, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/29/2014
+*/
+
+/* Grid –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    background-color: #1e1e1e;
+    border: 3px solid #e0e0e0;
+    border-radius: 25px;
+}
+@media (min-width: 400px) {
+    .container {
+        width: 100%;
+        padding: 20px 15px;
+    }
+}
+@media (min-width: 550px) {
+    .container {
+        width: 80%;
+        padding: 20px 20px;
+    }
+}
+
+/* Base Styles –––––––––––––––––––––––––––––––––––––––––––––––––– */
+html {
+    font-size: 62.5%;
+    height: 100%;
+    min-height: 100%;
+}
+body {
+    font-size: 1.75em;
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    color: #e0e0e0;
+    min-height: 100%;
+    background: linear-gradient(
+        to bottom right,
+        #d71920,
+        #252526,
+        #252526,
+        #1e1e1e
+    ) no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+}
+
+/* Typography –––––––––––––––––––––––––––––––––––––––––––––––––– */
+h1 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-family: Zilla Slab, serif;
+    font-size: 4rem;
+    line-height: 1.2;
+    letter-spacing: -0.1rem;
+}
+@media (min-width: 550px) {
+    h1 {
+        font-size: 5rem;
+    }
+}
+
+/* Links –––––––––––––––––––––––––––––––––––––––––––––––––– */
+a {
+    color: #d71920;
+    text-decoration: none;
+}
+a:hover {
+    color: #f10e16;
+}
+
+/* Utilities –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.is-text-centered {
+    text-align: center;
+}
+.is-centered {
+    margin-right: auto;
+    margin-left: auto;
+}
+.is-mobile-centered {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+@media (min-width: 550px) {
+    .is-mobile-centered {
+        text-align: inherit;
+    }
+}
+
+/* Clearing –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container:after,
+.u-cf {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Media Queries –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@media (min-width: 550px) {
+    .store-data div {
+        width: 33%;
+    }
+    .no-results-modal-content {
+        width: 50% !important;
+    }
+    .store-search form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+@media (min-width: 750px) {
+    .no-results-modal-content {
+        width: 35% !important;
+    }
+}
+@media (min-width: 900px) {
+    .store-data {
+        flex-direction: row !important;
+    }
+    .store-identification {
+        flex-direction: row !important;
+        align-items: center !important;
+    }
+    .data-cell:first-child {
+        border-bottom: 0 !important;
+    }
+}
+@media (min-width: 1000px) {
+    .no-results-modal-content {
+        width: 343px !important;
+    }
+}
+
+/* Forms –––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="text"] {
+    padding: 6px 10px;
+    color: #e0e0e0;
+    text-align: center;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    background-color: #1e1e1e;
+    border: 2px solid #4e4e4e;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+input[type="text"]:focus {
+    border: 2px solid #f10e16;
+    outline: 0;
+}
+label {
+    display: block;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+}
+label > .label-body {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-weight: normal;
+}
+
+/* Buttons –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,
+input[type="submit"],
+input[type="button"] {
+    display: inline-block;
+    height: 38px;
+    min-width: 100px;
+    padding: 0 20px;
+    margin-top: 0.5rem;
+    color: #555;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.75em;
+    font-weight: 400;
+    line-height: 38px;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 2px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.button:focus,
+input[type="submit"]:focus,
+input[type="button"]:focus {
+    color: #333;
+    border-color: #888;
+    outline: 0;
+}
+.button.button-primary,
+input[type="submit"].button-primary,
+input[type="button"].button-primary {
+    color: #fff;
+    background-color: #4e4e4e;
+    border-color: #4e4e4e;
+    border-width: 2px;
+}
+
+/* Auto Complete –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+.autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 247px;
+    border: 2px solid #4e4e4e;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+    overflow-y: auto;
+    max-height: 50vh;
+    margin: 0;
+    /* Remove bottom padding from store-search when autocomplete is open */
+    margin-top: -15px;
+}
+.autocomplete-items.is-mobile-centered {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+}
+@media (min-width: 550px) {
+    .autocomplete-items.is-mobile-centered {
+        left: 0;
+        transform: none;
+        right: 0;
+    }
+}
+
+/* Results styling */
+.autocomplete-items > div {
+    padding: 10px;
+    cursor: pointer;
+    border-top: 1px solid #4e4e4e;
+    border-bottom: 1px solid #4e4e4e;
+    background-color: rgba(30, 30, 30, 0.9);
+}
+.autocomplete-items > div:first-child {
+    border-top: 0;
+}
+.autocomplete-items > div:last-child {
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
+.autocomplete-items > div:hover {
+    font-size: 1.25em;
+    color: #ffffff;
+}
+.autocomplete-active {
+    color: #ffffff;
+}
+
+/* Custom for Webpage –––––––––––––––––––––––––––––––––––––––––––––––––– */
+.store-closed {
+    color: #4e4e4e;
+}
+.store-closed a {
+    color: #4e4e4e;
+    text-decoration: none;
+}
+.store-closed a:hover {
+    color: #4e4e4e;
+}
+
+.store-search {
+    margin: 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 10px 0 15px 0;
+    background-color: inherit;
+}
+
+.search-label {
+    margin-top: 0.5rem;
+}
+
+.store-search input[type="text"] {
+    height: 38px;
+    width: 250px;
+    margin-top: 0.5rem;
+    font-size: 16px;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.store-search input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Store container focus and layout */
+.store-container {
+    display: flex;
+    padding-left: 10px;
+    border-top: 1.5px solid #4e4e4e;
+    border-right: 3px solid #4e4e4e;
+    border-left: 3px solid #4e4e4e;
+    border-bottom: 1.5px solid #4e4e4e;
+    outline: none;
+}
+.store-container:first-child {
+    border-top: 3px solid #4e4e4e;
+    border-radius: 15px 15px 0 0;
+}
+.store-container:last-child {
+    border-bottom: 3px solid #4e4e4e;
+    border-radius: 0 0 15px 15px;
+}
+.store-container div {
+    display: flex;
+}
+.store-container:focus {
+    border: 3px solid #f10e16;
+    outline: 0 !important;
+}
+
+.store-identification {
+    padding: 10px 0;
+    width: 50%;
+    align-self: center;
+    flex-direction: column;
+}
+
+.store-number {
+    font-size: 1.5em;
+    padding-right: 5px;
+}
+
+.store-name {
+    font-size: 0.75em;
+}
+
+.store-data {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.store-data div {
+    width: 100%;
+    justify-content: center;
+}
+.data-cell:first-child {
+    border-bottom: 1px solid #4e4e4e;
+}
+.data-cell {
+    padding: 10px 0;
+    border-left: 1px solid #4e4e4e;
+}
+.data-cell div {
+    align-self: center;
+}
+
+.construction {
+    width: 30px;
+    padding-right: 5px;
+}
+.no-phone {
+    width: 20px;
+}
+
+.no-results-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.no-results-modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    max-width: 960px;
+    margin: 284px auto 0;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    background-color: rgba(30, 30, 30, 0.75);
+    border: 3px solid #4e4e4e;
+    border-radius: 15px;
+}
+.no-results-message {
+    font-size: 2rem;
+    padding: 0 10px 10px;
+}
+.close:hover,
+.close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+.hide {
+    display: none;
+}
