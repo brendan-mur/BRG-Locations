@@ -55,15 +55,7 @@ function Admin() {
       {formData && (
         <form className="edit-store-form" style={{ marginTop: '2rem' }}>
           <label>
-            Store Number:
-            <input
-              className="store-fields"
-              type="text"
-              name="storeNumber"
-              value={formData.storeNumber}
-              onChange={handleChange}
-              disabled
-            />
+            Store Number: {formData.storeNumber}
           </label>
           <label>
             Store Name:
