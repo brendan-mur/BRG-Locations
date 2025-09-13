@@ -1,0 +1,103 @@
+input[type="text"] {
+    text-align: left;
+    margin-left: 1rem;
+}
+
+label {
+    padding: 0.5rem 0;
+}
+
+select {
+    padding: 6px 10px;
+    color: #e0e0e0;
+    text-align: center;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    background-color: #1e1e1e;
+    border: 2px solid #4e4e4e;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+select:focus {
+    border: 2px solid #f10e16;
+    outline: 0;
+}
+
+select.store-fields {
+    margin-left: 1rem;
+}
+
+button {
+    padding: 6px 10px;
+    color: #e0e0e0;
+    text-align: center;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    background-color: #1e1e1e;
+    border: 2px solid #4e4e4e;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+button:focus {
+    border: 2px solid #f10e16;
+    outline: 0;
+}
+
+.store-select-container {
+    min-width: 250px;
+    width: 100%;
+}
+
+.edit-store-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-row label {
+  text-align: right;
+  font-weight: 500;
+}
+
+.store-fields {
+  width: 100%;
+  max-width: 250px;
+}
+
+/* On mobile, stack label above input */
+@media (max-width: 550px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 4px;
+  }
+  .form-row label {
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  .form-row span {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+  .form-row .store-fields,
+  .form-row input[type="text"],
+  .form-row select {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import locations from './data/locations.json';
+import './styles/Admin.css';
 
 function Admin() {
   const [selectedStore, setSelectedStore] = useState('');
@@ -37,109 +38,77 @@ function Admin() {
     setFormData(originalData ? { ...originalData } : null);
   };
 
+  // Handle cancel (reset form to original data)
+  const handleDelete = (e) => {
+    e.preventDefault();
+    setFormData(originalData ? { ...originalData } : null);
+  };
+
   return (
     <div className="admin-page">
-      <h3>Select a Store to edit</h3>
-      <select
-        value={selectedStore}
-        onChange={handleSelect}
-      >
-        <option value="">-- Select Store --</option>
-        {locations.map(store => (
-          <option key={store.storeNumber} value={store.storeNumber}>
-            {store.storeNumber} - {store.storeName}
-          </option>
-        ))}
-      </select>
-
+      <div className="store-select-container is-mobile-centered">
+        <select
+          title="Select Store"
+          className="store-select" 
+          value={selectedStore}
+          onChange={handleSelect}
+        >
+          <option value="">-- Select a Store to Edit --</option>
+          {locations.map(store => (
+            <option key={store.storeNumber} value={store.storeNumber}>
+              {store.storeNumber} - {store.storeName}
+            </option>
+          ))}
+        </select>
+      </div>
       {formData && (
         <form className="edit-store-form" style={{ marginTop: '2rem' }}>
-          <label>
-            Store Number: {formData.storeNumber}
-          </label>
-          <label>
-            Store Name:
-            <input
-              className="store-fields"
-              type="text"
-              name="storeName"
-              value={formData.storeName}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Address:
-            <input
-              className="store-fields"
-              type="text"
-              name="storeAddressRoad"
-              value={formData.storeAddressRoad}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            City, State Zip:
-            <input
-              className="store-fields"
-              type="text"
-              name="storeAddressCityStateZip"
-              value={formData.storeAddressCityStateZip}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Phone:
-            <input
-              className="store-fields"
-              type="text"
-              name="storePhone"
-              value={formData.storePhone}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            GPS Latitude:
-            <input
-              className="store-fields"
-              type="text"
-              name="storeGPSLat"
-              value={formData.storeGPSLat}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            GPS Longitude:
-            <input
-              className="store-fields"
-              type="text"
-              name="storeGPSLong"
-              value={formData.storeGPSLong}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Store Open (Y/N):
-            <input
-              className="store-fields"
-              type="text"
-              name="storeOpen"
-              value={formData.storeOpen}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Under Construction (Y/N):
-            <input
-              className="store-fields"
-              type="text"
-              name="storeConstruction"
-              value={formData.storeConstruction}
-              onChange={handleChange}
-            />
-          </label>
+          <div className="form-row">
+            <label>Store Number:</label>
+            <span>{formData.storeNumber}</span>
+          </div>
+          <div className="form-row">
+            <label>Store Name:</label>
+            <input className="store-fields" type="text" name="storeName" value={formData.storeName} onChange={handleChange} />
+          </div>
+          <div className="form-row">
+            <label>Address:</label>
+            <input className="store-fields" type="text" name="storeAddressRoad" value={formData.storeAddressRoad} onChange={handleChange} />
+          </div>
+          <div className="form-row">
+            <label>City, State Zip:</label>
+            <input className="store-fields" type="text" name="storeAddressCityStateZip" value={formData.storeAddressCityStateZip} onChange={handleChange} />
+          </div>
+          <div className="form-row">
+            <label>Phone:</label>
+            <input className="store-fields" type="text" name="storePhone" value={formData.storePhone} onChange={handleChange} />
+          </div>
+          <div className="form-row">
+            <label>GPS Latitude:</label>
+            <input className="store-fields" type="text" name="storeGPSLat" value={formData.storeGPSLat} onChange={handleChange} />
+          </div>
+          <div className="form-row">
+            <label>GPS Longitude:</label>
+            <input className="store-fields" type="text" name="storeGPSLong" value={formData.storeGPSLong} onChange={handleChange} />
+          </div>
+          <div className="form-row">
+            <label>Store Open:</label>
+            <select className="store-fields" name="storeOpen" value={formData.storeOpen} onChange={handleChange}>
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select>
+          </div>
+          <div className="form-row">
+            <label>Under Construction:</label>
+            <select className="store-fields" name="storeConstruction" value={formData.storeConstruction} onChange={handleChange}>
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select>
+          </div>
           <div style={{ marginTop: '1rem' }}>
             <button type="submit" onClick={handleUpdate}>Update</button>
             <button type="button" onClick={handleCancel} style={{ marginLeft: '1rem' }}>Cancel</button>
+            <button type="button" onClick={handleDelete} style={{ float: 'right' }}>Delete Store</button>
           </div>
         </form>
       )}
