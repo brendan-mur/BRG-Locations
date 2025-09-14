@@ -25,7 +25,7 @@ select:focus {
     outline: 0;
 }
 
-select.store-fields {
+select.store-fields, span.store-fields {
     margin-left: 1rem;
 }
 
@@ -40,6 +40,11 @@ button {
     border-radius: 4px;
     box-shadow: none;
     box-sizing: border-box;
+    margin-left: 0;
+}
+
+button :first-child {
+    margin-left: 1rem;
 }
 
 button:focus {
@@ -47,9 +52,22 @@ button:focus {
     outline: 0;
 }
 
+.container {
+    max-width: 650px;;
+}
+
+.admin-page {
+    display: block;
+    margin: 0 auto;
+    text-align: center;    
+}
 .store-select-container {
     min-width: 250px;
     width: 100%;
+}
+
+.store-select-container button {
+    margin-left: 1rem;
 }
 
 .edit-store-form {
@@ -58,6 +76,9 @@ button:focus {
   gap: 12px;
 }
 
+.edit-store-form button {
+float:right;
+}
 .form-row {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -75,6 +96,12 @@ button:focus {
   max-width: 250px;
 }
 
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 10px;
+}
 /* On mobile, stack label above input */
 @media (max-width: 550px) {
   .form-row {
@@ -84,16 +111,12 @@ button:focus {
   }
   .form-row label {
     text-align: center;
-    margin-bottom: 2px;
-  }
-  .form-row span {
-    text-align: center;
-    display: block;
-    margin: 0 auto;
+    padding-bottom: 0;
   }
   .form-row .store-fields,
   .form-row input[type="text"],
-  .form-row select {
+  .form-row select,
+  .form-row span {
     display: block;
     margin: 0 auto;
     text-align: center;

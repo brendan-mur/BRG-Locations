@@ -1,47 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import locations from './data/locations.json';
 import './styles/Admin.css';
 
+type Store = {
+  storeNumber: string;
+  storeName: string;
+  storePhone: string;
+  storeAddressRoad: string;
+  storeAddressCityStateZip: string;
+  storeGPSLat: string;
+  storeGPSLong: string;
+  storeConstruction: string;
+  storeOpen: string;
+};
+
 function Admin() {
-  const [selectedStore, setSelectedStore] = useState('');
-  const [formData, setFormData] = useState(null);
-  const [originalData, setOriginalData] = useState(null);
+  const [selectedStore, setSelectedStore] = useState<string>('');
+  const [formData, setFormData] = useState<Store | null>(null);
+  const [originalData, setOriginalData] = useState<Store | null>(null);
 
   // Load selected store data into form
-  const handleSelect = (e) => {
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const storeNum = e.target.value;
     setSelectedStore(storeNum);
-    const store = locations.find(s => s.storeNumber === storeNum);
+    const store = (locations as Store[]).find(s => s.storeNumber === storeNum);
     setFormData(store ? { ...store } : null);
     setOriginalData(store ? { ...store } : null);
   };
 
   // Handle form field changes
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData(prev => prev ? { ...prev, [name]: value } : prev);
   };
 
   // Handle update (save changes)
-  const handleUpdate = (e) => {
+  const handleUpdate = (e: FormEvent) => {
     e.preventDefault();
     // Implement save logic here (e.g., API call or file write)
     alert('Store updated!');
   };
 
   // Handle cancel (reset form to original data)
-  const handleCancel = (e) => {
+  const handleCancel = (e: FormEvent) => {
     e.preventDefault();
     setFormData(originalData ? { ...originalData } : null);
   };
 
-  // Handle cancel (reset form to original data)
-  const handleDelete = (e) => {
+  // Handle delete (reset form to original data)
+  const handleDelete = (e: FormEvent) => {
     e.preventDefault();
     setFormData(originalData ? { ...originalData } : null);
+  };
+
+  // Handle adding a new store
+  const handleAddNew = () => {
+    setSelectedStore('');
+    setFormData({
+      storeNumber: '',
+      storeName: '',
+      storePhone: '',
+      storeAddressRoad: '',
+      storeAddressCityStateZip: '',
+      storeGPSLat: '',
+      storeGPSLong: '',
+      storeConstruction: 'Y',
+      storeOpen: 'N',
+    });
+    setOriginalData(null);
   };
 
   return (
@@ -49,23 +75,37 @@ function Admin() {
       <div className="store-select-container is-mobile-centered">
         <select
           title="Select Store"
-          className="store-select" 
+          className="store-select"
           value={selectedStore}
           onChange={handleSelect}
         >
           <option value="">-- Select a Store to Edit --</option>
-          {locations.map(store => (
+          {(locations as Store[]).map(store => (
             <option key={store.storeNumber} value={store.storeNumber}>
               {store.storeNumber} - {store.storeName}
             </option>
           ))}
         </select>
+        <button type="button" onClick={handleAddNew}>Add New Store</button>
       </div>
       {formData && (
         <form className="edit-store-form" style={{ marginTop: '2rem' }}>
           <div className="form-row">
             <label>Store Number:</label>
-            <span>{formData.storeNumber}</span>
+            {originalData ? (
+              <span className="store-fields">
+                {formData.storeNumber}
+                <button type="button" onClick={handleDelete}>Delete Store</button>
+              </span>
+            ) : (
+              <input
+                className="store-fields"
+                type="text"
+                name="storeNumber"
+                value={formData.storeNumber}
+                onChange={handleChange}
+              />
+            )}
           </div>
           <div className="form-row">
             <label>Store Name:</label>
@@ -105,10 +145,9 @@ function Admin() {
               <option value="N">N</option>
             </select>
           </div>
-          <div style={{ marginTop: '1rem' }}>
+          <div className="action-buttons">
             <button type="submit" onClick={handleUpdate}>Update</button>
-            <button type="button" onClick={handleCancel} style={{ marginLeft: '1rem' }}>Cancel</button>
-            <button type="button" onClick={handleDelete} style={{ float: 'right' }}>Delete Store</button>
+            <button type="button" onClick={handleCancel}>Cancel</button>
           </div>
         </form>
       )}

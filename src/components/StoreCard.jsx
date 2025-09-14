@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import { mapSelector } from '../utils/MapSelector';
-import { underConstruction } from '../utils/Construction';
-import { showPhone } from '../utils/ShowPhone';
+import { mapSelector } from '../utils/MapSelector.tsx';
+import { underConstruction } from '../utils/Construction.tsx';
+import { showPhone } from '../utils/ShowPhone.tsx';
 
 
 function LocationCard({ storeNumber, storeName, storePhone, storeAddressRoad, storeAddressCityStateZip, storeGPSLat, storeGPSLong, storeConstruction, storeOpen, isActive }) {

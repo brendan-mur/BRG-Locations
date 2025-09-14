@@ -1,6 +1,8 @@
-import { formatPhone } from '../utils/FormatPhone';
+import { formatPhone } from '../utils/FormatPhone.tsx';
 
-export function showPhone(storePhone) {
+export function showPhone(
+    storePhone: string
+) {
 if (storePhone) return <a href={`tel:${storePhone}`}>{formatPhone(storePhone)}</a>;
 return <img className="no-phone" src="src/assets/no_phone.svg"></img>;
 }

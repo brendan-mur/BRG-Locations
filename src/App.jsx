@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import StoreSearch from './components/StoreSearch';
 import StoreList from './components/StoreList';
-import Admin from './Admin';
+import Admin from './Admin.tsx';
 import './styles/App.css';
 
 function Layout({ children }) {
