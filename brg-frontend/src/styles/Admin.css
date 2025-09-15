@@ -122,6 +122,6 @@ button:focus {
     margin: 0 auto;
     text-align: center;
     width: 90%;
-    max-width: 350px;
+    max-width: 250px;
   }
 }
