@@ -308,7 +308,7 @@ input[type="button"].button-primary {
   width: 250px;
   margin-top: 0.5rem;
   font-size: 16px;
-  -moz-appearance: textfield;
+  --appearance: textfield;
 }
 
 .store-search input::-webkit-outer-spin-button,

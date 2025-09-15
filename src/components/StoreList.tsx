@@ -1,5 +1,5 @@
 import React from "react";
-import StoreCard from "./StoreCard";
+import StoreCard from "./StoreCard.tsx";
 import locations from "../data/locations.json";
 
 function LocationList() {
@@ -21,6 +21,7 @@ function LocationList() {
           storeGPSLong={loc.storeGPSLong}
           storeConstruction={loc.storeConstruction}
           storeOpen={loc.storeOpen}
+          isActive={false}
         />
       ))}
     </div>

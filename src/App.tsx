@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import StoreSearch from "./components/StoreSearch";
-import StoreList from "./components/StoreList";
+import StoreSearch from "./components/StoreSearch.tsx";
+import StoreList from "./components/StoreList.tsx";
 import Admin from "./Admin.tsx";
 import "./styles/App.css";
 
@@ -11,11 +11,9 @@ function Layout({ children }) {
         <h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            xlink="http://www.w3.org/1999/xlink"
             width="250"
             height="45.393"
             viewBox="0 0 66.146 12.01"
-            v="https://vecta.io/nano"
           >
             <image
               width="66.146"

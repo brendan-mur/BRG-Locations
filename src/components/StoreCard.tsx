@@ -15,7 +15,7 @@ function LocationCard({
   storeOpen,
   isActive,
 }) {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isActive && containerRef.current) {
