@@ -1,9 +1,11 @@
-import React from 'react';
-import StoreCard from './StoreCard';
-import locations from '../data/locations.json';
+import React from "react";
+import StoreCard from "./StoreCard";
+import locations from "../data/locations.json";
 
 function LocationList() {
-  const sortedLocations = [...locations].sort((a, b) => parseInt(a.storeNumber) - parseInt(b.storeNumber));
+  const sortedLocations = [...locations].sort(
+    (a, b) => parseInt(a.storeNumber) - parseInt(b.storeNumber)
+  );
 
   return (
     <div className="store-list">

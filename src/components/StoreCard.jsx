@@ -1,10 +1,20 @@
-import React, { useRef, useEffect } from 'react';
-import { mapSelector } from '../utils/MapSelector.tsx';
-import { underConstruction } from '../utils/Construction.tsx';
-import { showPhone } from '../utils/ShowPhone.tsx';
+import React, { useRef, useEffect } from "react";
+import { mapSelector } from "../utils/MapSelector.tsx";
+import { underConstruction } from "../utils/Construction.tsx";
+import { showPhone } from "../utils/ShowPhone.tsx";
 
-
-function LocationCard({ storeNumber, storeName, storePhone, storeAddressRoad, storeAddressCityStateZip, storeGPSLat, storeGPSLong, storeConstruction, storeOpen, isActive }) {
+function LocationCard({
+  storeNumber,
+  storeName,
+  storePhone,
+  storeAddressRoad,
+  storeAddressCityStateZip,
+  storeGPSLat,
+  storeGPSLong,
+  storeConstruction,
+  storeOpen,
+  isActive,
+}) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +23,8 @@ function LocationCard({ storeNumber, storeName, storePhone, storeAddressRoad, st
     }
   }, [isActive]);
 
-  const storeActive = storeOpen == "N" && storeConstruction == "N" ? "store-closed" : "";
+  const storeActive =
+    storeOpen == "N" && storeConstruction == "N" ? "store-closed" : "";
   return (
     <div
       id={storeNumber}
@@ -21,22 +32,30 @@ function LocationCard({ storeNumber, storeName, storePhone, storeAddressRoad, st
       className={`store-container ${storeActive}`}
       tabIndex={-1} // Make div focusable
     >
-        <div className="store-identification">
-          {underConstruction(storeConstruction)}
-          <div className="store-number">{storeNumber}</div>
-          <div className="store-name">{storeName}</div>
+      <div className="store-identification">
+        {underConstruction(storeConstruction)}
+        <div className="store-number">{storeNumber}</div>
+        <div className="store-name">{storeName}</div>
+      </div>
+      <div className="store-data">
+        <div className="is-text-centered data-cell">
+          <div>{showPhone(storePhone)}</div>
         </div>
-        <div className="store-data">
-          <div className="is-text-centered data-cell">
-            <div>
-              {showPhone(storePhone)}
-            </div>
-          </div>
-          <div className="is-text-centered data-cell">
-            <a href="#" onClick={(e)=>{e.preventDefault(); mapSelector(storeGPSLat, storeGPSLong, storeNumber);}}>{storeAddressRoad}<br />{storeAddressCityStateZip}</a>
-          </div>
+        <div className="is-text-centered data-cell">
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              mapSelector(storeGPSLat, storeGPSLong, storeNumber);
+            }}
+          >
+            {storeAddressRoad}
+            <br />
+            {storeAddressCityStateZip}
+          </a>
         </div>
       </div>
+    </div>
   );
 }
 
