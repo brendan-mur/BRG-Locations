@@ -1,20 +1,38 @@
 import React, { useRef, useEffect } from "react";
-import { mapSelector } from "../utils/MapSelector.tsx";
-import { underConstruction } from "../utils/Construction.tsx";
-import { showPhone } from "../utils/ShowPhone.tsx";
+import { mapSelector } from "../utils/MapSelector";
+import { underConstruction } from "../utils/Construction";
+import { showPhone } from "../utils/ShowPhone";
+import { storeClosed } from "../utils/StoreClosed";
+
+type StoreCardProps = {
+  storeNumber: string;
+  storeName: string;
+  storePhone: string;
+  storeAddress: string;
+  storeCity: string;
+  storeState: string;
+  storeZip: string;
+  storeGPSLat: string;
+  storeGPSLong: string;
+  storeConstruction: boolean;
+  storeOpen: boolean;
+  isActive: boolean;
+};
 
 function LocationCard({
   storeNumber,
   storeName,
   storePhone,
-  storeAddressRoad,
-  storeAddressCityStateZip,
+  storeAddress,
+  storeCity,
+  storeState,
+  storeZip,
   storeGPSLat,
   storeGPSLong,
   storeConstruction,
   storeOpen,
   isActive,
-}) {
+}: StoreCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,16 +41,18 @@ function LocationCard({
     }
   }, [isActive]);
 
-  const storeActive =
-    storeOpen == "N" && storeConstruction == "N" ? "store-closed" : "";
-  return (
+  const storeActive: boolean =
+    !storeOpen && !storeConstruction ? false : true;
+  const storeActiveClass: string = storeActive ? "" : "store-closed";
+    return (
     <div
       id={storeNumber}
       ref={containerRef}
-      className={`store-container ${storeActive}`}
+      className={`store-container ${storeActiveClass}`}
       tabIndex={-1} // Make div focusable
     >
       <div className="store-identification">
+        {storeClosed(storeActive)}
         {underConstruction(storeConstruction)}
         <div className="store-number">{storeNumber}</div>
         <div className="store-name">{storeName}</div>
@@ -49,9 +69,9 @@ function LocationCard({
               mapSelector(storeGPSLat, storeGPSLong, storeNumber);
             }}
           >
-            {storeAddressRoad}
+            {storeAddress}
             <br />
-            {storeAddressCityStateZip}
+            {storeCity}, {storeState} {storeZip}
           </a>
         </div>
       </div>

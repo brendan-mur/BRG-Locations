@@ -1,10 +1,15 @@
 import React from "react";
-import StoreCard from "./StoreCard.tsx";
-import locations from "../data/locations.json";
+import StoreCard from "./StoreCard";
+import { useLocations } from "../hooks/useLocations";
 
-function LocationList() {
+function StoreList() {
+  const { locations, loading, error } = useLocations();
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading locations.</div>;
+
   const sortedLocations = [...locations].sort(
-    (a, b) => parseInt(a.storeNumber) - parseInt(b.storeNumber)
+    (a, b) => parseInt(a.number) - parseInt(b.number)
   );
 
   return (
@@ -12,15 +17,17 @@ function LocationList() {
       {sortedLocations.map((loc, index) => (
         <StoreCard
           key={index}
-          storeNumber={loc.storeNumber}
-          storeName={loc.storeName}
-          storePhone={loc.storePhone}
-          storeAddressRoad={loc.storeAddressRoad}
-          storeAddressCityStateZip={loc.storeAddressCityStateZip}
-          storeGPSLat={loc.storeGPSLat}
-          storeGPSLong={loc.storeGPSLong}
-          storeConstruction={loc.storeConstruction}
-          storeOpen={loc.storeOpen}
+          storeNumber={loc.number}
+          storeName={loc.name}
+          storePhone={loc.phone}
+          storeAddress={loc.address}
+          storeCity={loc.city}
+          storeState={loc.state}
+          storeZip={loc.zip}
+          storeGPSLat={loc.latitude}
+          storeGPSLong={loc.longitude}
+          storeConstruction={loc.construction}
+          storeOpen={loc.open}
           isActive={false}
         />
       ))}
@@ -28,4 +35,4 @@ function LocationList() {
   );
 }
 
-export default LocationList;
+export default StoreList;

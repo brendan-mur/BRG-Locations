@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import StoreSearch from "./components/StoreSearch.tsx";
-import StoreList from "./components/StoreList.tsx";
-import Admin from "./Admin.tsx";
+import StoreSearch from "./components/StoreSearch";
+import StoreList from "./components/StoreList";
+import Admin from "./Admin";
 import "./styles/App.css";
 
-function Layout({ children }) {
+function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="container">
       <div className="is-mobile-centered">

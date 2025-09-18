@@ -17,7 +17,7 @@ function storeSearch() {
         )
       : [];
 
-  const handleSelect = (storeId) => {
+  const handleSelect = (storeId: string) => {
     const el = document.getElementById(storeId);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "center" });

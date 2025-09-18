@@ -1,7 +1,7 @@
-export function underConstruction(construction: string) {
-  if (construction == "Y") {
+export function underConstruction(construction: boolean) {
+  if (construction) {
     return (
-      <img className="construction" src="src/assets/construction.svg"></img>
+      <img className="construction" title="Under Construction" src="src/assets/construction.svg"></img>
     );
   }
   return;
