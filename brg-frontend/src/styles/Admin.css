@@ -123,3 +123,12 @@ button:focus {
     max-width: 250px;
   }
 }
+
+.error {
+  border: 2px solid #e74c3c;
+}
+.field-error {
+  color: #e74c3c;
+  font-size: 0.9em;
+  margin-top: 2px;
+}

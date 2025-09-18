@@ -1,29 +1,20 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useLocations } from "./hooks/useLocations";
+import { useLocations } from "./hooks/UseLocations";
+import { useStoreActions } from "./hooks/UseStoreActions";
+import { Store } from "./types/Store";
 import "./styles/Admin.css";
 
-type Store = {
-  number: string;
-  name: string;
-  phone: string;
-  latitude: string;
-  longitude: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  construction: boolean;
-  open: boolean;
-};
 
 function Admin() {
-  const { locations, loading, error } = useLocations();
+  const { locations, loading, error, fetchLocations } = useLocations();
+  const { saveStore, deleteStore } = useStoreActions();
   const sortedLocations = [...locations].sort(
     (a, b) => parseInt(a.number) - parseInt(b.number)
   );
   const [selectedStore, setSelectedStore] = useState<string>("");
   const [formData, setFormData] = useState<Store | null>(null);
   const [originalData, setOriginalData] = useState<Store | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string[] }>({});
 
   // Load selected store data into form
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -41,14 +32,45 @@ function Admin() {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => (prev ? { ...prev, [name]: value } : prev));
+    setFormData((prev) => {
+      if (!prev) return prev;
+      // Convert string to boolean for specific fields
+      if (name === "open" || name === "construction") {
+        return { ...prev, [name]: value === "true" };
+      }
+      return { ...prev, [name]: value };
+    });
   };
 
+  // Before sending formData to the API
+  const sanitizeFormData = (data: Store): Store => ({
+    ...data,
+    name: data.name.trim(),
+    address: data.address.trim(),
+    city: data.city.trim(),
+    state: data.state.trim().toUpperCase(),
+    zip: data.zip.trim(),
+    phone: data.phone ? data.phone.trim() : "",
+  });
+
   // Handle update (save changes)
-  const handleUpdate = (e: FormEvent) => {
+  const handleUpdate = async (e: FormEvent) => {
     e.preventDefault();
-    // Implement save logic here (e.g., API call or file write)
-    alert("Store updated!");
+    if (!formData) return;
+    const sanitized = sanitizeFormData(formData);
+    setFieldErrors({}); // Clear previous errors
+    try {
+      await saveStore(sanitized, !!originalData);
+      alert(originalData ? "Store updated!" : "Store created!");
+      fetchLocations();
+    } catch (err: any) {
+      if (err.response && err.response.status === 422) {
+        setFieldErrors(err.response.data.errors);
+      } else {
+        alert("Error saving store.");
+        console.error(err);
+      }
+    }
   };
 
   // Handle cancel (reset form to original data)
@@ -58,9 +80,20 @@ function Admin() {
   };
 
   // Handle delete (reset form to original data)
-  const handleDelete = (e: FormEvent) => {
+  const handleDelete = async (e: FormEvent) => {
     e.preventDefault();
-    setFormData(originalData ? { ...originalData } : null);
+    if (!formData) return;
+    try {
+      await deleteStore(formData.number);
+      alert("Store deleted!");
+      fetchLocations(); // Refresh the data
+      setFormData(null);
+      setOriginalData(null);
+      setSelectedStore("");
+    } catch (err) {
+      alert("Error deleting store.");
+      console.error(err);
+    }
   };
 
   // Handle adding a new store
@@ -93,7 +126,7 @@ function Admin() {
           onChange={handleSelect}
         >
           <option value="">-- Select a Store to Edit --</option>
-          {(locations as Store[]).map((store) => (
+          {(sortedLocations as Store[]).map((store) => (
             <option key={store.number} value={store.number}>
               {store.number} - {store.name}
             </option>
@@ -127,12 +160,17 @@ function Admin() {
           <div className="form-row">
             <label>Store Name:</label>
             <input
-              className="store-fields"
+              className={`store-fields${
+                fieldErrors.name ? " error" : ""
+              }`}
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
             />
+            {fieldErrors.name && (
+              <div className="field-error">{fieldErrors.name[0]}</div>
+            )}
           </div>
           <div className="form-row">
             <label>Address:</label>

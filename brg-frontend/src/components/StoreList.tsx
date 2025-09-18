@@ -1,6 +1,6 @@
 import React from "react";
 import StoreCard from "./StoreCard";
-import { useLocations } from "../hooks/useLocations";
+import { useLocations } from "../hooks/UseLocations";
 
 function StoreList() {
   const { locations, loading, error } = useLocations();
