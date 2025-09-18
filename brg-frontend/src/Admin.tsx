@@ -1,20 +1,26 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import locations from "./data/locations.json";
+import { useLocations } from "./hooks/useLocations";
 import "./styles/Admin.css";
 
 type Store = {
-  storeNumber: string;
-  storeName: string;
-  storePhone: string;
-  storeAddressRoad: string;
-  storeAddressCityStateZip: string;
-  storeGPSLat: string;
-  storeGPSLong: string;
-  storeConstruction: string;
-  storeOpen: string;
+  number: string;
+  name: string;
+  phone: string;
+  latitude: string;
+  longitude: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  construction: boolean;
+  open: boolean;
 };
 
 function Admin() {
+  const { locations, loading, error } = useLocations();
+  const sortedLocations = [...locations].sort(
+    (a, b) => parseInt(a.number) - parseInt(b.number)
+  );
   const [selectedStore, setSelectedStore] = useState<string>("");
   const [formData, setFormData] = useState<Store | null>(null);
   const [originalData, setOriginalData] = useState<Store | null>(null);
@@ -23,8 +29,8 @@ function Admin() {
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const storeNum = e.target.value;
     setSelectedStore(storeNum);
-    const store = (locations as Store[]).find(
-      (s) => s.storeNumber === storeNum
+    const store = (sortedLocations as Store[]).find(
+      (s) => s.number === storeNum
     );
     setFormData(store ? { ...store } : null);
     setOriginalData(store ? { ...store } : null);
@@ -61,19 +67,22 @@ function Admin() {
   const handleAddNew = () => {
     setSelectedStore("");
     setFormData({
-      storeNumber: "",
-      storeName: "",
-      storePhone: "",
-      storeAddressRoad: "",
-      storeAddressCityStateZip: "",
-      storeGPSLat: "",
-      storeGPSLong: "",
-      storeConstruction: "Y",
-      storeOpen: "N",
+      number: "",
+      name: "",
+      phone: "",
+      latitude: "",
+      longitude: "",
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      construction: true,
+      open: false,
     });
     setOriginalData(null);
   };
-
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading locations.</div>;
   return (
     <div className="admin-page">
       <div className="store-select-container is-mobile-centered">
@@ -85,8 +94,8 @@ function Admin() {
         >
           <option value="">-- Select a Store to Edit --</option>
           {(locations as Store[]).map((store) => (
-            <option key={store.storeNumber} value={store.storeNumber}>
-              {store.storeNumber} - {store.storeName}
+            <option key={store.number} value={store.number}>
+              {store.number} - {store.name}
             </option>
           ))}
         </select>
@@ -100,7 +109,7 @@ function Admin() {
             <label>Store Number:</label>
             {originalData ? (
               <span className="store-fields">
-                {formData.storeNumber}
+                {formData.number}
                 <button type="button" onClick={handleDelete}>
                   Delete Store
                 </button>
@@ -109,8 +118,8 @@ function Admin() {
               <input
                 className="store-fields"
                 type="text"
-                name="storeNumber"
-                value={formData.storeNumber}
+                name="number"
+                value={formData.number}
                 onChange={handleChange}
               />
             )}
@@ -120,8 +129,8 @@ function Admin() {
             <input
               className="store-fields"
               type="text"
-              name="storeName"
-              value={formData.storeName}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
             />
           </div>
@@ -130,18 +139,38 @@ function Admin() {
             <input
               className="store-fields"
               type="text"
-              name="storeAddressRoad"
-              value={formData.storeAddressRoad}
+              name="address"
+              value={formData.address}
               onChange={handleChange}
             />
           </div>
           <div className="form-row">
-            <label>City, State Zip:</label>
+            <label>City:</label>
             <input
               className="store-fields"
               type="text"
-              name="storeAddressCityStateZip"
-              value={formData.storeAddressCityStateZip}
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+            />
+          </div>
+            <div className="form-row">
+            <label>State:</label>
+            <input
+              className="store-fields"
+              type="text"
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+            />
+          </div>
+            <div className="form-row">
+            <label>Zip:</label>
+            <input
+              className="store-fields"
+              type="text"
+              name="zip"
+              value={formData.zip}
               onChange={handleChange}
             />
           </div>
@@ -150,8 +179,8 @@ function Admin() {
             <input
               className="store-fields"
               type="text"
-              name="storePhone"
-              value={formData.storePhone}
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
             />
           </div>
@@ -160,8 +189,8 @@ function Admin() {
             <input
               className="store-fields"
               type="text"
-              name="storeGPSLat"
-              value={formData.storeGPSLat}
+              name="latitude"
+              value={formData.latitude}
               onChange={handleChange}
             />
           </div>
@@ -170,8 +199,8 @@ function Admin() {
             <input
               className="store-fields"
               type="text"
-              name="storeGPSLong"
-              value={formData.storeGPSLong}
+              name="longitude"
+              value={formData.longitude}
               onChange={handleChange}
             />
           </div>
@@ -179,24 +208,24 @@ function Admin() {
             <label>Store Open:</label>
             <select
               className="store-fields"
-              name="storeOpen"
-              value={formData.storeOpen}
+              name="open"
+              value={formData.open ? "true" : "false"}
               onChange={handleChange}
             >
-              <option value="Y">Y</option>
-              <option value="N">N</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           <div className="form-row">
             <label>Under Construction:</label>
             <select
               className="store-fields"
-              name="storeConstruction"
-              value={formData.storeConstruction}
+              name="construction"
+              value={formData.construction ? "true" : "false"}
               onChange={handleChange}
             >
-              <option value="Y">Y</option>
-              <option value="N">N</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </div>
           <div className="action-buttons">

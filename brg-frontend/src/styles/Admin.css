@@ -74,7 +74,6 @@ button:focus {
 .edit-store-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .edit-store-form button {
@@ -84,7 +83,7 @@ button:focus {
   display: grid;
   grid-template-columns: 180px 1fr;
   align-items: center;
-  gap: 10px;
+
 }
 
 .form-row label {
@@ -108,7 +107,6 @@ button:focus {
   .form-row {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
-    gap: 4px;
   }
   .form-row label {
     text-align: center;
