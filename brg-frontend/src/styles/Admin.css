@@ -20,11 +20,6 @@ select {
   box-sizing: border-box;
 }
 
-select:focus {
-  border: 2px solid #f10e16;
-  outline: 0;
-}
-
 select.store-fields,
 span.store-fields {
   margin-left: 1rem;
@@ -44,13 +39,8 @@ button {
   margin-left: 0;
 }
 
-button :first-child {
+button {
   margin-left: 1rem;
-}
-
-button:focus {
-  border: 2px solid #f10e16;
-  outline: 0;
 }
 
 .admin-page {
@@ -82,6 +72,11 @@ button:focus {
   margin: 0 auto;
 }
 
+.form-actions button {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .admin-form-row {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -96,6 +91,15 @@ button:focus {
 .store-fields {
   width: 100%;
   max-width: 250px;
+}
+
+.store-number-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 250px;
+  margin-left: 1rem;
 }
 
 .action-buttons {
@@ -117,8 +121,9 @@ button:focus {
   .admin-form-row .store-fields,
   .admin-form-row input[type='text'],
   .admin-form-row select,
-  .admin-form-row span {
-    display: block;
+  .admin-form-row span,
+  .store-number-display {
+    display: flex; /* Changed from block to flex for mobile alignment */
     margin: 0 auto;
     text-align: center;
     width: 90%;
@@ -133,4 +138,8 @@ button:focus {
   color: #e74c3c;
   font-size: 0.9em;
   margin-top: 2px;
+}
+
+.btn-logout {
+  float: right;
 }

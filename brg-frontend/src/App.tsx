@@ -46,8 +46,6 @@ function App() {
         path="/"
         element={
           <Layout className="home-container">
-            {' '}
-            {/* <-- Pass class for home page */}
             <StoreSearch />
             <StoreList />
           </Layout>
@@ -57,8 +55,6 @@ function App() {
         path="/login"
         element={
           <Layout className="page-container">
-            {' '}
-            {/* <-- Pass class for other pages */}
             <Login />
           </Layout>
         }
@@ -68,8 +64,6 @@ function App() {
           path="/admin"
           element={
             <Layout className="page-container">
-              {' '}
-              {/* <-- Apply classes directly here */}
               <Admin />
             </Layout>
           }

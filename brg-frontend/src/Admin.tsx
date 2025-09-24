@@ -1,230 +1,280 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useLocations } from './hooks/UseLocations';
 import { useStoreActions } from './hooks/UseStoreActions';
+import { useAuth } from './context/AuthContext';
 import { Store } from './types/Store';
 import './styles/Admin.css';
 
 function Admin() {
-  const { locations, loading, error, fetchLocations } = useLocations();
+  const { logout } = useAuth();
+  // --- Hooks and State ---
+  const {
+    locations,
+    loading,
+    error: fetchError,
+    fetchLocations,
+  } = useLocations();
   const { saveStore, deleteStore } = useStoreActions();
+
   const sortedLocations = [...locations].sort(
     (a, b) => parseInt(a.number) - parseInt(b.number)
   );
-  const [selectedStore, setSelectedStore] = useState<string>('');
-  const [formData, setFormData] = useState<Store | null>(null);
-  const [originalData, setOriginalData] = useState<Store | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string[] }>(
-    {}
-  );
 
-  // Load selected store data into form
+  const [selectedStore, setSelectedStore] = useState<string>('');
+  const [formData, setFormData] = useState<Partial<Store>>({});
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
+  // State for user feedback
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // Effect to clear messages after 5 seconds
+  useEffect(() => {
+    if (successMessage || errorMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage('');
+        setErrorMessage('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage, errorMessage]);
+
+  // --- Event Handlers ---
+
+  // When a store is selected from the dropdown
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
-    const storeNum = e.target.value;
-    setSelectedStore(storeNum);
-    const store = (sortedLocations as Store[]).find(
-      (s) => s.number === storeNum
-    );
-    setFormData(store ? { ...store } : null);
-    setOriginalData(store ? { ...store } : null);
+    const storeNumber = e.target.value;
+    setSelectedStore(storeNumber);
+    if (storeNumber) {
+      const store = locations.find((loc) => loc.number === storeNumber);
+      setFormData(store || {});
+      setIsFormVisible(true);
+    } else {
+      setIsFormVisible(false);
+      setFormData({});
+    }
   };
 
-  // Handle form field changes
-  const handleChange = (
+  // When "Add New Store" is clicked
+  const handleAddNew = () => {
+    setSelectedStore('');
+    setFormData({});
+    setIsFormVisible(true);
+  };
+
+  // When form fields are changed
+  const handleFormChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => {
-      if (!prev) return prev;
-      // Convert string to boolean for specific fields
-      if (name === 'open' || name === 'construction') {
-        return { ...prev, [name]: value === 'true' };
-      }
-      return { ...prev, [name]: value };
-    });
+    // Handle boolean values from select dropdowns
+    const finalValue =
+      name === 'open' || name === 'construction' ? value === 'true' : value;
+    setFormData((prev) => ({ ...prev, [name]: finalValue }));
   };
 
-  // Before sending formData to the API
-  const sanitizeFormData = (data: Store): Store => ({
-    ...data,
-    name: data.name.trim(),
-    address: data.address.trim(),
-    city: data.city.trim(),
-    state: data.state.trim().toUpperCase(),
-    zip: data.zip.trim(),
-    phone: data.phone ? data.phone.trim() : '',
-  });
-
-  // Handle update (save changes)
-  const handleUpdate = async (e: FormEvent) => {
+  const handleSave = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData) return;
-    const sanitized = sanitizeFormData(formData);
-    setFieldErrors({}); // Clear previous errors
+    setSuccessMessage('');
+    setErrorMessage('');
+
     try {
-      await saveStore(sanitized, !!originalData);
-      alert(originalData ? 'Store updated!' : 'Store created!');
+      const isUpdate = !!selectedStore;
+      await saveStore(formData as Store, isUpdate);
+      setSuccessMessage(
+        `Store ${formData.number} has been saved successfully!`
+      );
       fetchLocations();
+      setIsFormVisible(false);
+      setSelectedStore('');
+      setFormData({});
     } catch (err: any) {
-      if (err.response && err.response.status === 422) {
-        setFieldErrors(err.response.data.errors);
+      if (err.response?.data?.message) {
+        setErrorMessage(`Error: ${err.response.data.message}`);
       } else {
-        alert('Error saving store.');
-        console.error(err);
+        setErrorMessage('An unexpected error occurred. Please try again.');
       }
     }
   };
 
-  // Handle cancel (reset form to original data)
-  const handleCancel = (e: FormEvent) => {
-    e.preventDefault();
-    setFormData(originalData ? { ...originalData } : null);
-  };
+  const handleDelete = async () => {
+    if (!selectedStore) return;
+    if (
+      !window.confirm(
+        `Are you sure you want to delete store #${selectedStore}?`
+      )
+    )
+      return;
 
-  // Handle delete (reset form to original data)
-  const handleDelete = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!formData) return;
     try {
-      await deleteStore(formData.number);
-      alert('Store deleted!');
-      fetchLocations(); // Refresh the data
-      setFormData(null);
-      setOriginalData(null);
+      await deleteStore(selectedStore);
+      setSuccessMessage(`Store #${selectedStore} deleted successfully.`);
+      fetchLocations();
+      setIsFormVisible(false);
       setSelectedStore('');
+      setFormData({});
     } catch (err) {
-      alert('Error deleting store.');
-      console.error(err);
+      setErrorMessage('Failed to delete the store.');
     }
   };
 
-  // Handle adding a new store
-  const handleAddNew = () => {
+  const handleCancel = () => {
+    setIsFormVisible(false);
     setSelectedStore('');
-    setFormData({
-      number: '',
-      name: '',
-      phone: '',
-      latitude: '',
-      longitude: '',
-      address: '',
-      city: '',
-      state: '',
-      zip: '',
-      construction: true,
-      open: false,
-    });
-    setOriginalData(null);
+    setFormData({});
   };
+
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading locations.</div>;
+  if (fetchError)
+    return <div className="feedback error">Error loading locations.</div>;
+
   return (
     <div className="admin-page">
-      <div className="store-select-container is-mobile-centered">
+      <h2>
+        Manage Store Locations
+        <button onClick={logout} className="btn-logout">
+          Logout
+        </button>
+      </h2>
+
+      {/* --- Feedback Display Area --- */}
+      {successMessage && (
+        <div className="feedback success" role="alert">
+          {successMessage}
+        </div>
+      )}
+      {errorMessage && (
+        <div className="feedback error" role="alert">
+          {errorMessage}
+        </div>
+      )}
+      {fetchError && (
+        <div className="feedback error" role="alert">
+          Error loading locations.
+        </div>
+      )}
+
+      <div className="stores-select-container is-mobile-centered">
         <select
           title="Select Store"
-          className="store-select"
+          className="stores-select"
           value={selectedStore}
           onChange={handleSelect}
         >
           <option value="">-- Select a Store to Edit --</option>
-          {(sortedLocations as Store[]).map((store) => (
+          {sortedLocations.map((store) => (
             <option key={store.number} value={store.number}>
-              {store.number} - {store.name}
+              #{store.number} - {store.name}
             </option>
           ))}
         </select>
-        <button type="button" onClick={handleAddNew}>
+        <button type="button" onClick={handleAddNew} className="btn-add-new">
           Add New Store
         </button>
       </div>
-      <div className="admin-form-container">
-        {formData && (
-          <form className="edit-store-form" style={{ marginTop: '2rem' }}>
+
+      {isFormVisible && (
+        <div className="admin-form-container">
+          <form
+            onSubmit={handleSave}
+            className="admin-form"
+            style={{ marginTop: '2rem' }}
+          >
             <div className="admin-form-row">
-              <label>Store Number:</label>
-              {originalData ? (
-                <span className="store-fields">
-                  {formData.number}
-                  <button type="button" onClick={handleDelete}>
-                    Delete Store
+              <label htmlFor="storeNumber">Store Number:</label>
+              {selectedStore ? (
+                <div className="store-number-display">
+                  <span>{formData.number}</span>
+                  <button
+                    type="button"
+                    onClick={handleDelete}
+                    className="btn-delete-inline"
+                  >
+                    Delete
                   </button>
-                </span>
+                </div>
               ) : (
                 <input
+                  id="storeNumber"
                   className="store-fields"
                   type="text"
                   name="number"
-                  value={formData.number}
-                  onChange={handleChange}
+                  value={formData.number || ''}
+                  onChange={handleFormChange}
+                  required
                 />
               )}
             </div>
             <div className="admin-form-row">
-              <label>Store Name:</label>
+              <label htmlFor="storeName">Store Name:</label>
               <input
-                className={`store-fields${fieldErrors.name ? ' error' : ''}`}
+                id="storeName"
+                className="store-fields"
                 type="text"
                 name="name"
-                value={formData.name}
-                onChange={handleChange}
+                value={formData.name || ''}
+                onChange={handleFormChange}
+                required
               />
-              {fieldErrors.name && (
-                <div className="field-error">{fieldErrors.name[0]}</div>
-              )}
             </div>
             <div className="admin-form-row">
-              <label>Address:</label>
+              <label htmlFor="storeAddress">Address:</label>
               <input
+                id="storeAddress"
                 className="store-fields"
                 type="text"
                 name="address"
-                value={formData.address}
-                onChange={handleChange}
+                value={formData.address || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
-              <label>City:</label>
+              <label htmlFor="storeCity">City:</label>
               <input
+                id="storeCity"
                 className="store-fields"
                 type="text"
                 name="city"
-                value={formData.city}
-                onChange={handleChange}
+                value={formData.city || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
-              <label>State:</label>
+              <label htmlFor="storeState">State:</label>
               <input
+                id="storeState"
                 className="store-fields"
                 type="text"
                 name="state"
-                value={formData.state}
-                onChange={handleChange}
+                value={formData.state || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
-              <label>Zip:</label>
+              <label htmlFor="storeZip">Zip:</label>
               <input
+                id="storeZip"
                 className="store-fields"
                 type="text"
                 name="zip"
-                value={formData.zip}
-                onChange={handleChange}
+                value={formData.zip || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
-              <label>Phone:</label>
+              <label htmlFor="storePhone">Phone:</label>
               <input
+                id="storePhone"
                 className="store-fields"
                 type="text"
                 name="phone"
-                value={formData.phone}
-                onChange={handleChange}
+                value={formData.phone || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
               <label>
-                GPS Latitude:
+                GPS Latitude:{' '}
                 <a
                   href="https://www.gps-coordinates.net/"
                   target="_blank"
@@ -239,13 +289,13 @@ function Admin() {
                 className="store-fields"
                 type="text"
                 name="latitude"
-                value={formData.latitude}
-                onChange={handleChange}
+                value={formData.latitude || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
               <label>
-                GPS Longitude:
+                GPS Longitude:{' '}
                 <a
                   href="https://www.gps-coordinates.net/"
                   target="_blank"
@@ -260,45 +310,52 @@ function Admin() {
                 className="store-fields"
                 type="text"
                 name="longitude"
-                value={formData.longitude}
-                onChange={handleChange}
+                value={formData.longitude || ''}
+                onChange={handleFormChange}
               />
             </div>
             <div className="admin-form-row">
-              <label>Store Open:</label>
+              <label htmlFor="storeOpen">Store Open:</label>
               <select
+                id="storeOpen"
                 className="store-fields"
                 name="open"
                 value={formData.open ? 'true' : 'false'}
-                onChange={handleChange}
+                onChange={handleFormChange}
               >
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
             <div className="admin-form-row">
-              <label>Under Construction:</label>
+              <label htmlFor="storeConstruction">Under Construction:</label>
               <select
+                id="storeConstruction"
                 className="store-fields"
                 name="construction"
                 value={formData.construction ? 'true' : 'false'}
-                onChange={handleChange}
+                onChange={handleFormChange}
               >
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
-            <div className="action-buttons">
-              <button type="submit" onClick={handleUpdate}>
-                Update
+
+            <div className="form-actions">
+              <button type="submit" className="btn-save">
+                {selectedStore ? 'Update Store' : 'Create Store'}
               </button>
-              <button type="button" onClick={handleCancel}>
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="btn-cancel"
+              >
                 Cancel
               </button>
             </div>
           </form>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
