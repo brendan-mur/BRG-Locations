@@ -1,21 +1,21 @@
-import axios from "axios";
-import { Store } from "../types/Store";
+import apiClient from '../api/AxiosConfig';
+import { Store } from '../types/Store';
 
-export function useStoreActions() {
-  const saveStore = async (formData: Store, isUpdate: boolean) => {
+export const useStoreActions = () => {
+  const saveStore = async (storeData: Store, isUpdate: boolean) => {
     if (isUpdate) {
-      return axios.put(
-        `http://localhost:8000/api/locations/${formData.number}`,
-        formData
+      return await apiClient.put(
+        `/api/locations/${storeData.number}`,
+        storeData
       );
     } else {
-      return axios.post("http://localhost:8000/api/locations", formData);
+      return await apiClient.post('/api/locations', storeData);
     }
   };
 
   const deleteStore = async (storeNumber: string) => {
-    return axios.delete(`http://localhost:8000/api/locations/${storeNumber}`);
+    return await apiClient.delete(`/api/locations/${storeNumber}`);
   };
 
   return { saveStore, deleteStore };
-}
+};
