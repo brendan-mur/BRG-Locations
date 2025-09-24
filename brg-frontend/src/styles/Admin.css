@@ -1,4 +1,4 @@
-input[type="text"] {
+input[type='text'] {
   text-align: left;
   margin-left: 1rem;
 }
@@ -12,7 +12,7 @@ select {
   color: #e0e0e0;
   text-align: center;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: #1e1e1e;
   border: 2px solid #4e4e4e;
   border-radius: 4px;
@@ -35,7 +35,7 @@ button {
   color: #e0e0e0;
   text-align: center;
   font-weight: 400;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: #1e1e1e;
   border: 2px solid #4e4e4e;
   border-radius: 4px;
@@ -51,10 +51,6 @@ button :first-child {
 button:focus {
   border: 2px solid #f10e16;
   outline: 0;
-}
-
-.container {
-  max-width: 650px;
 }
 
 .admin-page {
@@ -79,14 +75,20 @@ button:focus {
 .edit-store-form button {
   float: right;
 }
-.form-row {
+
+.admin-form-container {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.admin-form-row {
   display: grid;
   grid-template-columns: 180px 1fr;
   align-items: center;
-
 }
 
-.form-row label {
+.admin-form-row label {
   text-align: right;
   font-weight: 500;
 }
@@ -104,18 +106,18 @@ button:focus {
 }
 /* On mobile, stack label above input */
 @media (max-width: 550px) {
-  .form-row {
+  .admin-form-row {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
   }
-  .form-row label {
+  .admin-form-row label {
     text-align: center;
     padding-bottom: 0;
   }
-  .form-row .store-fields,
-  .form-row input[type="text"],
-  .form-row select,
-  .form-row span {
+  .admin-form-row .store-fields,
+  .admin-form-row input[type='text'],
+  .admin-form-row select,
+  .admin-form-row span {
     display: block;
     margin: 0 auto;
     text-align: center;

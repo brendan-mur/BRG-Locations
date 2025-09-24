@@ -1,0 +1,84 @@
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+.autocomplete-items {
+  position: absolute;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 247px;
+  border: 2px solid #4e4e4e;
+  border-top: 0;
+  border-radius: 0 0 4px 4px;
+  overflow-y: auto;
+  max-height: 50vh;
+  margin: -15px 0 0 10px;
+}
+.autocomplete-items.is-mobile-centered {
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+}
+.autocomplete-items > div {
+  padding: 10px;
+  cursor: pointer;
+  border-top: 1px solid #4e4e4e;
+  border-bottom: 1px solid #4e4e4e;
+  background-color: rgba(30, 30, 30, 0.9);
+}
+.autocomplete-items > div:first-child {
+  border-top: 0;
+}
+.autocomplete-items > div:last-child {
+  border-bottom: 0;
+  border-radius: 0 0 4px 4px;
+}
+.autocomplete-items > div:hover {
+  font-size: 1.25em;
+  color: #ffffff;
+}
+.autocomplete-active {
+  color: #ffffff;
+}
+.store-search {
+  margin: 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 10px 0 15px 0;
+  background-color: inherit;
+}
+
+.search-label {
+  margin-top: 0.5rem;
+}
+
+.store-search input[type='text'] {
+  height: 38px;
+  width: 250px;
+  margin-top: 0.5rem;
+  font-size: 16px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.store-search input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (min-width: 550px) {
+  .autocomplete-items.is-mobile-centered {
+    left: 0;
+    transform: none;
+    right: 0;
+  }
+  .store-search form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

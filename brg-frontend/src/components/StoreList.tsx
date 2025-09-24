@@ -1,6 +1,7 @@
-import React from "react";
-import StoreCard from "./StoreCard";
-import { useLocations } from "../hooks/UseLocations";
+import React from 'react';
+import StoreCard from './StoreCard';
+import { useLocations } from '../hooks/UseLocations';
+import '../styles/StoreList.css';
 
 function StoreList() {
   const { locations, loading, error } = useLocations();
@@ -13,7 +14,7 @@ function StoreList() {
   );
 
   return (
-    <div className="store-list">
+    <div className="store-list" style={{ maxWidth: '800px' }}>
       {sortedLocations.map((loc, index) => (
         <StoreCard
           key={index}

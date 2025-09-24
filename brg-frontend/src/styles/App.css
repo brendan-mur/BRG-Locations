@@ -1,3 +1,13 @@
-input[type="text"] {
+input[type='text'] {
   text-align: center;
+}
+
+/* For the home page */
+.home-container {
+  max-width: 800px;
+}
+
+/* For the login and admin pages */
+.page-container {
+  max-width: 650px;
 }
