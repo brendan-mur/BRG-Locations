@@ -1,0 +1,42 @@
+.login-container {
+  text-align: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.login-container button {
+  margin-top: 1rem;
+}
+input[type='text'],
+[type='password'],
+[type='email'] {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.login-form-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1rem;
+  align-items: center;
+  text-align: right;
+}
+
+@media (max-width: 550px) {
+  .login-form-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .login-form-row label {
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .login-form-row input[type='text'],
+  .login-form-row input[type='password'],
+  .login-form-row input[type='email'] {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    max-width: 200px;
+  }
+}

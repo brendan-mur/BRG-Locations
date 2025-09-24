@@ -1,9 +1,8 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useLocations } from "./hooks/UseLocations";
-import { useStoreActions } from "./hooks/UseStoreActions";
-import { Store } from "./types/Store";
-import "./styles/Admin.css";
-
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useLocations } from './hooks/UseLocations';
+import { useStoreActions } from './hooks/UseStoreActions';
+import { Store } from './types/Store';
+import './styles/Admin.css';
 
 function Admin() {
   const { locations, loading, error, fetchLocations } = useLocations();
@@ -11,10 +10,12 @@ function Admin() {
   const sortedLocations = [...locations].sort(
     (a, b) => parseInt(a.number) - parseInt(b.number)
   );
-  const [selectedStore, setSelectedStore] = useState<string>("");
+  const [selectedStore, setSelectedStore] = useState<string>('');
   const [formData, setFormData] = useState<Store | null>(null);
   const [originalData, setOriginalData] = useState<Store | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string[] }>({});
+  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string[] }>(
+    {}
+  );
 
   // Load selected store data into form
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -35,8 +36,8 @@ function Admin() {
     setFormData((prev) => {
       if (!prev) return prev;
       // Convert string to boolean for specific fields
-      if (name === "open" || name === "construction") {
-        return { ...prev, [name]: value === "true" };
+      if (name === 'open' || name === 'construction') {
+        return { ...prev, [name]: value === 'true' };
       }
       return { ...prev, [name]: value };
     });
@@ -50,7 +51,7 @@ function Admin() {
     city: data.city.trim(),
     state: data.state.trim().toUpperCase(),
     zip: data.zip.trim(),
-    phone: data.phone ? data.phone.trim() : "",
+    phone: data.phone ? data.phone.trim() : '',
   });
 
   // Handle update (save changes)
@@ -61,13 +62,13 @@ function Admin() {
     setFieldErrors({}); // Clear previous errors
     try {
       await saveStore(sanitized, !!originalData);
-      alert(originalData ? "Store updated!" : "Store created!");
+      alert(originalData ? 'Store updated!' : 'Store created!');
       fetchLocations();
     } catch (err: any) {
       if (err.response && err.response.status === 422) {
         setFieldErrors(err.response.data.errors);
       } else {
-        alert("Error saving store.");
+        alert('Error saving store.');
         console.error(err);
       }
     }
@@ -85,30 +86,30 @@ function Admin() {
     if (!formData) return;
     try {
       await deleteStore(formData.number);
-      alert("Store deleted!");
+      alert('Store deleted!');
       fetchLocations(); // Refresh the data
       setFormData(null);
       setOriginalData(null);
-      setSelectedStore("");
+      setSelectedStore('');
     } catch (err) {
-      alert("Error deleting store.");
+      alert('Error deleting store.');
       console.error(err);
     }
   };
 
   // Handle adding a new store
   const handleAddNew = () => {
-    setSelectedStore("");
+    setSelectedStore('');
     setFormData({
-      number: "",
-      name: "",
-      phone: "",
-      latitude: "",
-      longitude: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
+      number: '',
+      name: '',
+      phone: '',
+      latitude: '',
+      longitude: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
       construction: true,
       open: false,
     });
@@ -136,146 +137,168 @@ function Admin() {
           Add New Store
         </button>
       </div>
-      {formData && (
-        <form className="edit-store-form" style={{ marginTop: "2rem" }}>
-          <div className="form-row">
-            <label>Store Number:</label>
-            {originalData ? (
-              <span className="store-fields">
-                {formData.number}
-                <button type="button" onClick={handleDelete}>
-                  Delete Store
-                </button>
-              </span>
-            ) : (
+      <div className="admin-form-container">
+        {formData && (
+          <form className="edit-store-form" style={{ marginTop: '2rem' }}>
+            <div className="admin-form-row">
+              <label>Store Number:</label>
+              {originalData ? (
+                <span className="store-fields">
+                  {formData.number}
+                  <button type="button" onClick={handleDelete}>
+                    Delete Store
+                  </button>
+                </span>
+              ) : (
+                <input
+                  className="store-fields"
+                  type="text"
+                  name="number"
+                  value={formData.number}
+                  onChange={handleChange}
+                />
+              )}
+            </div>
+            <div className="admin-form-row">
+              <label>Store Name:</label>
+              <input
+                className={`store-fields${fieldErrors.name ? ' error' : ''}`}
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              {fieldErrors.name && (
+                <div className="field-error">{fieldErrors.name[0]}</div>
+              )}
+            </div>
+            <div className="admin-form-row">
+              <label>Address:</label>
               <input
                 className="store-fields"
                 type="text"
-                name="number"
-                value={formData.number}
+                name="address"
+                value={formData.address}
                 onChange={handleChange}
               />
-            )}
-          </div>
-          <div className="form-row">
-            <label>Store Name:</label>
-            <input
-              className={`store-fields${
-                fieldErrors.name ? " error" : ""
-              }`}
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            {fieldErrors.name && (
-              <div className="field-error">{fieldErrors.name[0]}</div>
-            )}
-          </div>
-          <div className="form-row">
-            <label>Address:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label>City:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-            />
-          </div>
-            <div className="form-row">
-            <label>State:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="state"
-              value={formData.state}
-              onChange={handleChange}
-            />
-          </div>
-            <div className="form-row">
-            <label>Zip:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="zip"
-              value={formData.zip}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label>Phone:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label>GPS Latitude:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="latitude"
-              value={formData.latitude}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label>GPS Longitude:</label>
-            <input
-              className="store-fields"
-              type="text"
-              name="longitude"
-              value={formData.longitude}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label>Store Open:</label>
-            <select
-              className="store-fields"
-              name="open"
-              value={formData.open ? "true" : "false"}
-              onChange={handleChange}
-            >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-          <div className="form-row">
-            <label>Under Construction:</label>
-            <select
-              className="store-fields"
-              name="construction"
-              value={formData.construction ? "true" : "false"}
-              onChange={handleChange}
-            >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-          <div className="action-buttons">
-            <button type="submit" onClick={handleUpdate}>
-              Update
-            </button>
-            <button type="button" onClick={handleCancel}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      )}
+            </div>
+            <div className="admin-form-row">
+              <label>City:</label>
+              <input
+                className="store-fields"
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>State:</label>
+              <input
+                className="store-fields"
+                type="text"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>Zip:</label>
+              <input
+                className="store-fields"
+                type="text"
+                name="zip"
+                value={formData.zip}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>Phone:</label>
+              <input
+                className="store-fields"
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>
+                GPS Latitude:
+                <a
+                  href="https://www.gps-coordinates.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Find GPS Coordinates"
+                  style={{ textDecoration: 'none', marginLeft: '5px' }}
+                >
+                  ℹ️
+                </a>
+              </label>
+              <input
+                className="store-fields"
+                type="text"
+                name="latitude"
+                value={formData.latitude}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>
+                GPS Longitude:
+                <a
+                  href="https://www.gps-coordinates.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Find GPS Coordinates"
+                  style={{ textDecoration: 'none', marginLeft: '5px' }}
+                >
+                  ℹ️
+                </a>
+              </label>
+              <input
+                className="store-fields"
+                type="text"
+                name="longitude"
+                value={formData.longitude}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>Store Open:</label>
+              <select
+                className="store-fields"
+                name="open"
+                value={formData.open ? 'true' : 'false'}
+                onChange={handleChange}
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div className="admin-form-row">
+              <label>Under Construction:</label>
+              <select
+                className="store-fields"
+                name="construction"
+                value={formData.construction ? 'true' : 'false'}
+                onChange={handleChange}
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div className="action-buttons">
+              <button type="submit" onClick={handleUpdate}>
+                Update
+              </button>
+              <button type="button" onClick={handleCancel}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // if using React Router
-import locations from "../data/locations.json";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // if using React Router
+import locations from '../data/locations.json';
+import '../styles/StoreSearch.css';
 
 function storeSearch() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
   const filteredSuggestions =
@@ -20,9 +21,9 @@ function storeSearch() {
   const handleSelect = (storeId: string) => {
     const el = document.getElementById(storeId);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       el.focus(); // This will apply .store-container:focus CSS
-      setSearchTerm(""); // Clear search box after selection
+      setSearchTerm(''); // Clear search box after selection
     }
   };
 
@@ -38,7 +39,7 @@ function storeSearch() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onKeyUp={(e) => {
-          if (e.key === "Enter" && filteredSuggestions.length > 0) {
+          if (e.key === 'Enter' && filteredSuggestions.length > 0) {
             handleSelect(filteredSuggestions[0].storeNumber);
           }
         }}
