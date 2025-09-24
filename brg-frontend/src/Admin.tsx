@@ -1,10 +1,12 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useLocations } from './hooks/UseLocations';
 import { useStoreActions } from './hooks/UseStoreActions';
+import { useAuth } from './context/AuthContext';
 import { Store } from './types/Store';
 import './styles/Admin.css';
 
 function Admin() {
+  const { logout } = useAuth();
   // --- Hooks and State ---
   const {
     locations,
@@ -48,7 +50,6 @@ function Admin() {
       setFormData(store || {});
       setIsFormVisible(true);
     } else {
-      // If "-- Select a Store --" is chosen, hide the form
       setIsFormVisible(false);
       setFormData({});
     }
@@ -56,8 +57,8 @@ function Admin() {
 
   // When "Add New Store" is clicked
   const handleAddNew = () => {
-    setSelectedStore(''); // Clear selection to indicate "create" mode
-    setFormData({}); // Start with a blank form
+    setSelectedStore('');
+    setFormData({});
     setIsFormVisible(true);
   };
 
@@ -72,7 +73,6 @@ function Admin() {
     setFormData((prev) => ({ ...prev, [name]: finalValue }));
   };
 
-  // When the form is submitted (for both create and update)
   const handleSave = async (e: FormEvent) => {
     e.preventDefault();
     setSuccessMessage('');
@@ -84,8 +84,8 @@ function Admin() {
       setSuccessMessage(
         `Store ${formData.number} has been saved successfully!`
       );
-      fetchLocations(); // Refresh the list
-      setIsFormVisible(false); // Hide form on success
+      fetchLocations();
+      setIsFormVisible(false);
       setSelectedStore('');
       setFormData({});
     } catch (err: any) {
@@ -97,7 +97,6 @@ function Admin() {
     }
   };
 
-  // When "Delete" is clicked
   const handleDelete = async () => {
     if (!selectedStore) return;
     if (
@@ -110,7 +109,7 @@ function Admin() {
     try {
       await deleteStore(selectedStore);
       setSuccessMessage(`Store #${selectedStore} deleted successfully.`);
-      fetchLocations(); // Refresh list
+      fetchLocations();
       setIsFormVisible(false);
       setSelectedStore('');
       setFormData({});
@@ -119,21 +118,24 @@ function Admin() {
     }
   };
 
-  // When "Cancel" is clicked
   const handleCancel = () => {
     setIsFormVisible(false);
     setSelectedStore('');
     setFormData({});
   };
 
-  // --- Render Logic ---
   if (loading) return <div>Loading...</div>;
   if (fetchError)
     return <div className="feedback error">Error loading locations.</div>;
 
   return (
     <div className="admin-page">
-      <h2>Manage Store Locations</h2>
+      <h2>
+        Manage Store Locations
+        <button onClick={logout} className="btn-logout">
+          Logout
+        </button>
+      </h2>
 
       {/* --- Feedback Display Area --- */}
       {successMessage && (
