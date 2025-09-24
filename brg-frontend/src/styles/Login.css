@@ -40,3 +40,9 @@ input[type='text'],
     max-width: 200px;
   }
 }
+
+.login-container input:focus,
+.login-container button:focus {
+  border: 2px solid #f10e16;
+  outline: 0;
+}

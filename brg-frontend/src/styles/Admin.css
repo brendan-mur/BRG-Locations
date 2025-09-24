@@ -20,7 +20,9 @@ select {
   box-sizing: border-box;
 }
 
-select:focus {
+select:focus,
+button:focus,
+input:focus {
   border: 2px solid #f10e16;
   outline: 0;
 }
@@ -44,13 +46,8 @@ button {
   margin-left: 0;
 }
 
-button :first-child {
+button {
   margin-left: 1rem;
-}
-
-button:focus {
-  border: 2px solid #f10e16;
-  outline: 0;
 }
 
 .admin-page {
@@ -82,6 +79,11 @@ button:focus {
   margin: 0 auto;
 }
 
+.form-actions button {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .admin-form-row {
   display: grid;
   grid-template-columns: 180px 1fr;
@@ -96,6 +98,22 @@ button:focus {
 .store-fields {
   width: 100%;
   max-width: 250px;
+}
+
+.store-number-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 250px;
+  margin-left: 1rem;
+}
+
+.btn-delete-inline {
+  background-color: #dc3545; /* Red */
+  border-color: #dc3545;
+  color: white;
+  margin-left: 1rem; /* Space between number and button */
 }
 
 .action-buttons {
@@ -117,8 +135,9 @@ button:focus {
   .admin-form-row .store-fields,
   .admin-form-row input[type='text'],
   .admin-form-row select,
-  .admin-form-row span {
-    display: block;
+  .admin-form-row span,
+  .store-number-display {
+    display: flex; /* Changed from block to flex for mobile alignment */
     margin: 0 auto;
     text-align: center;
     width: 90%;
@@ -133,4 +152,23 @@ button:focus {
   color: #e74c3c;
   font-size: 0.9em;
   margin-top: 2px;
+}
+
+/* --- Styles for Feedback Messages --- */
+.feedback {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.feedback.success {
+  background-color: #28a745; /* Green */
+}
+
+.feedback.error {
+  background-color: #dc3545; /* Red */
 }
