@@ -58,7 +58,19 @@ function Admin() {
   // When "Add New Store" is clicked
   const handleAddNew = () => {
     setSelectedStore('');
-    setFormData({});
+    setFormData({
+      number: '',
+      name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      phone: '',
+      latitude: '',
+      longitude: '',
+      open: false,
+      construction: true,
+    });
     setIsFormVisible(true);
   };
 
@@ -130,12 +142,10 @@ function Admin() {
 
   return (
     <div className="admin-page">
-      <h2>
-        Manage Store Locations
-        <button onClick={logout} className="btn-logout">
-          Logout
-        </button>
-      </h2>
+      <button onClick={logout} className="btn-logout">
+        Logout
+      </button>
+      <h2>Manage Locations</h2>
 
       {/* --- Feedback Display Area --- */}
       {successMessage && (
@@ -164,7 +174,7 @@ function Admin() {
           <option value="">-- Select a Store to Edit --</option>
           {sortedLocations.map((store) => (
             <option key={store.number} value={store.number}>
-              #{store.number} - {store.name}
+              {store.number} - {store.name}
             </option>
           ))}
         </select>
@@ -185,11 +195,7 @@ function Admin() {
               {selectedStore ? (
                 <div className="store-number-display">
                   <span>{formData.number}</span>
-                  <button
-                    type="button"
-                    onClick={handleDelete}
-                    className="btn-delete-inline"
-                  >
+                  <button type="button" onClick={handleDelete}>
                     Delete
                   </button>
                 </div>

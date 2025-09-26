@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       } finally {
         // Always clear client-side session
         setToken(null);
-        navigate('/login');
+        navigate('/');
       }
     }
   }, [token, navigate]);

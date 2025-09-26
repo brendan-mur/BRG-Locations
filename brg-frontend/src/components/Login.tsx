@@ -49,7 +49,7 @@ function Login() {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit}>
-        <h2>Admin Login</h2>
+        <h3>Admin Login</h3>
 
         {/* --- Feedback Display Area --- */}
         {errorMessage && (

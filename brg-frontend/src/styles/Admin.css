@@ -108,7 +108,19 @@ button {
   margin-top: 1rem;
   gap: 10px;
 }
-/* On mobile, stack label above input */
+.error {
+  border: 2px solid #e74c3c;
+}
+.field-error {
+  color: #e74c3c;
+  font-size: 0.9em;
+  margin-top: 2px;
+}
+
+.btn-logout {
+  float: right;
+}
+
 @media (max-width: 550px) {
   .admin-form-row {
     grid-template-columns: 1fr;
@@ -121,25 +133,16 @@ button {
   .admin-form-row .store-fields,
   .admin-form-row input[type='text'],
   .admin-form-row select,
-  .admin-form-row span,
   .store-number-display {
-    display: flex; /* Changed from block to flex for mobile alignment */
+    display: flex;
     margin: 0 auto;
     text-align: center;
     width: 90%;
     max-width: 250px;
   }
-}
-
-.error {
-  border: 2px solid #e74c3c;
-}
-.field-error {
-  color: #e74c3c;
-  font-size: 0.9em;
-  margin-top: 2px;
-}
-
-.btn-logout {
-  float: right;
+  .admin-form-row span {
+    display: flex;
+    margin: 0 10% 0 auto;
+    text-align: center;
+  }
 }
