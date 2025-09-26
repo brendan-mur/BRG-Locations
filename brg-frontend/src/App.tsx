@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Admin from './Admin';
 import ProtectedRoute from './components/ProtectedRoute';
 import StoreSearch from './components/StoreSearch';
+import './styles/App.css';
 
 function Layout({
   children,
@@ -15,7 +16,7 @@ function Layout({
 }) {
   return (
     <div className={`container ${className || ''}`}>
-      <div className="is-mobile-centered">
+      <div className="header">
         <h1>
           <svg
             xmlns="http://www.w3.org/2000/svg"

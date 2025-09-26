@@ -16,12 +16,16 @@ input[type='text'],
 .login-form-row {
   display: grid;
   grid-template-columns: 100px 1fr;
-  gap: 1rem;
   align-items: center;
   text-align: right;
 }
 
 @media (max-width: 550px) {
+  h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
   .login-form-row {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;

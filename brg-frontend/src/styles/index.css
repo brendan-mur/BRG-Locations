@@ -75,6 +75,15 @@ h1 {
   }
 }
 
+.header {
+  text-align: center;
+}
+
+@media (min-width: 816px) {
+  .header {
+    text-align: left;
+  }
+}
 /* Links –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
   color: #d71920;
