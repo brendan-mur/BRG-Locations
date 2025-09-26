@@ -145,7 +145,7 @@ function Admin() {
       <button onClick={logout} className="btn-logout">
         Logout
       </button>
-      <h2>Manage Locations</h2>
+      <h3>Manage Locations</h3>
 
       {/* --- Feedback Display Area --- */}
       {successMessage && (
