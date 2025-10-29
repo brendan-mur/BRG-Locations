@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "laravel-vite-plugin": "^2.0.1",
+    "vite": "^7.1.7"
+  }
+}
