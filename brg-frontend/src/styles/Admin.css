@@ -127,6 +127,11 @@ button {
   padding: 0.5rem 1rem;
 }
 
+.admin-page h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 803px) {
   .admin-header {
     display: flex;
