@@ -117,8 +117,22 @@ button {
   margin-top: 2px;
 }
 
+.admin-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+}
+
 .btn-logout {
-  float: right;
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 803px) {
+  .admin-header {
+    display: flex;
+    float: center;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 550px) {

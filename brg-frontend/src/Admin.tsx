@@ -142,9 +142,12 @@ function Admin() {
 
   return (
     <div className="admin-page">
-      <button onClick={logout} className="btn-logout">
-        Logout
-      </button>
+      <div className="admin-header">
+        <button onClick={logout} className="btn-logout">
+          Logout
+        </button>
+      </div>
+
       <h3>Manage Locations</h3>
 
       {/* --- Feedback Display Area --- */}
