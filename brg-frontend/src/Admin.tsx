@@ -195,9 +195,6 @@ function Admin() {
               {selectedStore ? (
                 <div className="store-number-display">
                   <span>{formData.number}</span>
-                  <button type="button" onClick={handleDelete}>
-                    Delete
-                  </button>
                 </div>
               ) : (
                 <input
@@ -348,8 +345,11 @@ function Admin() {
             </div>
 
             <div className="form-actions">
+              <button type="button" onClick={handleDelete}>
+                Delete
+              </button>
               <button type="submit" className="btn-save">
-                {selectedStore ? 'Update Store' : 'Create Store'}
+                {selectedStore ? 'Update' : 'Create'}
               </button>
               <button
                 type="button"
