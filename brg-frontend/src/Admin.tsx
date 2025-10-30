@@ -142,9 +142,12 @@ function Admin() {
 
   return (
     <div className="admin-page">
-      <button onClick={logout} className="btn-logout">
-        Logout
-      </button>
+      <div className="admin-header">
+        <button onClick={logout} className="btn-logout">
+          Logout
+        </button>
+      </div>
+
       <h3>Manage Locations</h3>
 
       {/* --- Feedback Display Area --- */}
@@ -195,9 +198,6 @@ function Admin() {
               {selectedStore ? (
                 <div className="store-number-display">
                   <span>{formData.number}</span>
-                  <button type="button" onClick={handleDelete}>
-                    Delete
-                  </button>
                 </div>
               ) : (
                 <input
@@ -348,8 +348,11 @@ function Admin() {
             </div>
 
             <div className="form-actions">
+              <button type="button" onClick={handleDelete}>
+                Delete
+              </button>
               <button type="submit" className="btn-save">
-                {selectedStore ? 'Update Store' : 'Create Store'}
+                {selectedStore ? 'Update' : 'Create'}
               </button>
               <button
                 type="button"
