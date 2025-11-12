@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
-import { mapSelector } from "../utils/MapSelector";
-import { underConstruction } from "../utils/Construction";
-import { showPhone } from "../utils/ShowPhone";
-import { storeClosed } from "../utils/StoreClosed";
+import React, { useRef, useEffect } from 'react';
+import { mapSelector } from '../utils/MapSelector';
+import { underConstruction } from '../utils/Construction';
+import { showPhone } from '../utils/ShowPhone';
+import { storeClosed } from '../utils/StoreClosed';
 
 type StoreCardProps = {
   storeNumber: string;
@@ -41,10 +41,9 @@ function LocationCard({
     }
   }, [isActive]);
 
-  const storeActive: boolean =
-    !storeOpen && !storeConstruction ? false : true;
-  const storeActiveClass: string = storeActive ? "" : "store-closed";
-    return (
+  const storeActive: boolean = !storeOpen && !storeConstruction ? false : true;
+  const storeActiveClass: string = storeActive ? '' : 'store-closed';
+  return (
     <div
       id={storeNumber}
       ref={containerRef}

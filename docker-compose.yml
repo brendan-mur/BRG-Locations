@@ -1,0 +1,95 @@
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: brg_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - '${DB_PORT}:3306'
+    networks:
+      - brg_network
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      timeout: 20s
+      retries: 10
+
+  # Laravel API
+  api:
+    build:
+      context: ./brg-api
+      dockerfile: Dockerfile
+    container_name: brg_api
+    restart: unless-stopped
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_DEBUG=${APP_DEBUG}
+      - APP_KEY=${APP_KEY}
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - SANCTUM_STATEFUL_DOMAINS=localhost:${FRONTEND_PORT},127.0.0.1:${FRONTEND_PORT}
+    volumes:
+      - api_storage:/var/www/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - brg_network
+
+  # Nginx for Laravel API
+  api_webserver:
+    image: nginx:alpine
+    container_name: brg_api_nginx
+    restart: unless-stopped
+    ports:
+      - '${API_PORT}:80'
+    volumes:
+      - ./brg-api:/var/www
+      - ./docker/nginx/api.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
+    networks:
+      - brg_network
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./brg-frontend
+      dockerfile: Dockerfile
+    container_name: brg_frontend
+    restart: unless-stopped
+    ports:
+      - '${FRONTEND_PORT}:80'
+    depends_on:
+      - api_webserver
+    networks:
+      - brg_network
+
+  # Redis (for caching and sessions)
+  redis:
+    image: redis:7-alpine
+    container_name: brg_redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - brg_network
+
+volumes:
+  mysql_data:
+  redis_data:
+  api_storage:
+
+networks:
+  brg_network:
+    driver: bridge
