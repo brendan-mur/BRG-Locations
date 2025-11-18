@@ -8,10 +8,8 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
-  // Remove withCredentials to avoid CSRF requirement
 });
 
-// Simple token-only authentication
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('auth-token');
