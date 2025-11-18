@@ -37,7 +37,7 @@ services:
       - DB_DATABASE=${MYSQL_DATABASE}
       - DB_USERNAME=${MYSQL_USER}
       - DB_PASSWORD=${MYSQL_PASSWORD}
-      - SANCTUM_STATEFUL_DOMAINS=localhost:${FRONTEND_PORT},127.0.0.1:${FRONTEND_PORT}
+      # - SANCTUM_STATEFUL_DOMAINS=localhost:${FRONTEND_PORT},127.0.0.1:${FRONTEND_PORT}
     volumes:
       - api_storage:/var/www/storage
     depends_on:

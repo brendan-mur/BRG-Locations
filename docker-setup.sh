@@ -203,6 +203,7 @@ main() {
     wait_for_database
     run_migrations
     seed_admin_user
+    seed_location_data
     clear_caches
     show_status
     show_urls

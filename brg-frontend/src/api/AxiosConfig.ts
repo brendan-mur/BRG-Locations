@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Use environment variable or fallback to Docker setup
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const apiClient = axios.create({
@@ -9,7 +8,21 @@ const apiClient = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
-  withCredentials: true, // Important for CORS with credentials
+  // Remove withCredentials to avoid CSRF requirement
 });
+
+// Simple token-only authentication
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('auth-token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default apiClient;
