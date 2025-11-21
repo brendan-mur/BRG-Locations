@@ -24,8 +24,7 @@ class LocationController extends Controller
             'city' => 'required|string|max:100',
             'state' => 'required|string|size:2|alpha',
             'zip' => 'required|string|max:10|regex:/^\d{5}(-\d{4})?$/',
-            'construction' => 'required|boolean',
-            'open' => 'required|boolean',
+            'status' => 'required|string|in:Open,Closed,Construction',
         ]);
 
         // Optionally trim string fields
@@ -54,8 +53,7 @@ class LocationController extends Controller
             'city' => 'required|string|max:100',
             'state' => 'required|string|size:2|alpha',
             'zip' => 'required|string|max:10|regex:/^\d{5}(-\d{4})?$/',
-            'construction' => 'required|boolean',
-            'open' => 'required|boolean',
+            'status' => 'required|string|in:Open,Closed,Construction',
         ]);
 
         $validated = array_map(function($value) {

@@ -68,8 +68,7 @@ function Admin() {
       phone: '',
       latitude: '',
       longitude: '',
-      open: false,
-      construction: true,
+      status: 'Construction',
     });
     setIsFormVisible(true);
   };
@@ -321,29 +320,17 @@ function Admin() {
               />
             </div>
             <div className="admin-form-row">
-              <label htmlFor="storeOpen">Store Open:</label>
+              <label htmlFor="status">Store Status:</label>
               <select
-                id="storeOpen"
+                id="storeStatus"
                 className="store-fields"
-                name="open"
-                value={formData.open ? 'true' : 'false'}
+                name="status"
+                value={formData.status || ''}
                 onChange={handleFormChange}
               >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </div>
-            <div className="admin-form-row">
-              <label htmlFor="storeConstruction">Under Construction:</label>
-              <select
-                id="storeConstruction"
-                className="store-fields"
-                name="construction"
-                value={formData.construction ? 'true' : 'false'}
-                onChange={handleFormChange}
-              >
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="Open">Open</option>
+                <option value="Closed">Closed</option>
+                <option value="Construction">Under Construction</option>
               </select>
             </div>
 

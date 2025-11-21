@@ -24,8 +24,7 @@ class LocationSeeder extends Seeder
             'city' => 'Asheville',
             'state' => 'NC',
             'zip' => '28803',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '1628',
@@ -37,8 +36,7 @@ class LocationSeeder extends Seeder
             'city' => 'Hendersonville',
             'state' => 'NC',
             'zip' => '28739',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '1668',
@@ -50,8 +48,7 @@ class LocationSeeder extends Seeder
             'city' => 'Hickory',
             'state' => 'NC',
             'zip' => '28601',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '1738',
@@ -63,8 +60,7 @@ class LocationSeeder extends Seeder
             'city' => 'Asheville',
             'state' => 'NC',
             'zip' => '28805',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '1806',
@@ -76,8 +72,7 @@ class LocationSeeder extends Seeder
             'city' => 'Boone',
             'state' => 'NC',
             'zip' => '28607',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '1810',
@@ -89,8 +84,7 @@ class LocationSeeder extends Seeder
             'city' => 'Morganton',
             'state' => 'NC',
             'zip' => '28655',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '1837',
@@ -102,8 +96,7 @@ class LocationSeeder extends Seeder
             'city' => 'Lenoir',
             'state' => 'NC',
             'zip' => '28645',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '5060',
@@ -115,8 +108,7 @@ class LocationSeeder extends Seeder
             'city' => 'Monroe',
             'state' => 'NC',
             'zip' => '28110',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '5110',
@@ -128,8 +120,7 @@ class LocationSeeder extends Seeder
             'city' => 'Shelby',
             'state' => 'NC',
             'zip' => '28150',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '5419',
@@ -141,8 +132,7 @@ class LocationSeeder extends Seeder
             'city' => 'Newport',
             'state' => 'TN',
             'zip' => '37821',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '5527',
@@ -154,8 +144,7 @@ class LocationSeeder extends Seeder
             'city' => 'Pineville',
             'state' => 'NC',
             'zip' => '28134',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '5761',
@@ -167,8 +156,7 @@ class LocationSeeder extends Seeder
             'city' => 'Greenwood',
             'state' => 'SC',
             'zip' => '29649',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6276',
@@ -180,8 +168,7 @@ class LocationSeeder extends Seeder
             'city' => 'Waynesville',
             'state' => 'NC',
             'zip' => '28786',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6280',
@@ -193,8 +180,7 @@ class LocationSeeder extends Seeder
             'city' => 'Spartanburg',
             'state' => 'SC',
             'zip' => '29301',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6382',
@@ -206,8 +192,7 @@ class LocationSeeder extends Seeder
             'city' => 'Weaverville',
             'state' => 'NC',
             'zip' => '28787',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6477',
@@ -219,8 +204,7 @@ class LocationSeeder extends Seeder
             'city' => 'Forest City',
             'state' => 'NC',
             'zip' => '28043',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6572',
@@ -232,8 +216,7 @@ class LocationSeeder extends Seeder
             'city' => 'Simpsonville',
             'state' => 'SC',
             'zip' => '29680',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6659',
@@ -245,8 +228,7 @@ class LocationSeeder extends Seeder
             'city' => 'Arden',
             'state' => 'NC',
             'zip' => '28704',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6663',
@@ -258,8 +240,7 @@ class LocationSeeder extends Seeder
             'city' => 'Franklin',
             'state' => 'NC',
             'zip' => '28734',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6679',
@@ -271,8 +252,7 @@ class LocationSeeder extends Seeder
             'city' => 'Canton',
             'state' => 'NC',
             'zip' => '28716',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6795',
@@ -284,8 +264,7 @@ class LocationSeeder extends Seeder
             'city' => 'Lincolnton',
             'state' => 'NC',
             'zip' => '28092',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6875',
@@ -297,8 +276,7 @@ class LocationSeeder extends Seeder
             'city' => 'Indian Trail',
             'state' => 'NC',
             'zip' => '28079',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6909',
@@ -310,8 +288,7 @@ class LocationSeeder extends Seeder
             'city' => 'Whittier',
             'state' => 'NC',
             'zip' => '28789',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6930',
@@ -323,8 +300,7 @@ class LocationSeeder extends Seeder
             'city' => 'Bryson City',
             'state' => 'NC',
             'zip' => '28713',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6936',
@@ -336,8 +312,7 @@ class LocationSeeder extends Seeder
             'city' => 'Greer',
             'state' => 'SC',
             'zip' => '29650',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '6977',
@@ -349,8 +324,7 @@ class LocationSeeder extends Seeder
             'city' => 'Gastonia',
             'state' => 'NC',
             'zip' => '28054',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7023',
@@ -362,8 +336,7 @@ class LocationSeeder extends Seeder
             'city' => 'Charlotte',
             'state' => 'NC',
             'zip' => '28269',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7039',
@@ -375,8 +348,7 @@ class LocationSeeder extends Seeder
             'city' => 'Simpsonville',
             'state' => 'SC',
             'zip' => '29681',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7211',
@@ -388,8 +360,7 @@ class LocationSeeder extends Seeder
             'city' => 'Greenville',
             'state' => 'SC',
             'zip' => '29615',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7218',
@@ -401,8 +372,7 @@ class LocationSeeder extends Seeder
             'city' => 'Rockingham',
             'state' => 'NC',
             'zip' => '28379',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7219',
@@ -414,8 +384,7 @@ class LocationSeeder extends Seeder
             'city' => 'Wadesboro',
             'state' => 'NC',
             'zip' => '28170',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7297',
@@ -427,8 +396,7 @@ class LocationSeeder extends Seeder
             'city' => 'Asheville',
             'state' => 'NC',
             'zip' => '28806',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7320',
@@ -440,8 +408,7 @@ class LocationSeeder extends Seeder
             'city' => 'Hudson',
             'state' => 'NC',
             'zip' => '28638',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7326',
@@ -453,8 +420,7 @@ class LocationSeeder extends Seeder
             'city' => 'Brevard',
             'state' => 'NC',
             'zip' => '28712',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7342',
@@ -466,8 +432,7 @@ class LocationSeeder extends Seeder
             'city' => 'Pickens',
             'state' => 'SC',
             'zip' => '29671',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7398',
@@ -479,8 +444,7 @@ class LocationSeeder extends Seeder
             'city' => 'Boiling Springs',
             'state' => 'SC',
             'zip' => '29316',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7415',
@@ -492,8 +456,7 @@ class LocationSeeder extends Seeder
             'city' => 'Dallas',
             'state' => 'NC',
             'zip' => '28034',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7455',
@@ -505,8 +468,7 @@ class LocationSeeder extends Seeder
             'city' => 'Hickory',
             'state' => 'NC',
             'zip' => '28602',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7563',
@@ -518,8 +480,7 @@ class LocationSeeder extends Seeder
             'city' => 'Spartanburg',
             'state' => 'SC',
             'zip' => '29303',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7655',
@@ -531,8 +492,7 @@ class LocationSeeder extends Seeder
             'city' => 'Gastonia',
             'state' => 'NC',
             'zip' => '28054',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '7961',
@@ -544,8 +504,7 @@ class LocationSeeder extends Seeder
             'city' => 'Concord',
             'state' => 'NC',
             'zip' => '28027',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8523',
@@ -557,8 +516,7 @@ class LocationSeeder extends Seeder
             'city' => 'Asheville',
             'state' => 'NC',
             'zip' => '28806',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8544',
@@ -570,8 +528,7 @@ class LocationSeeder extends Seeder
             'city' => 'Hickory',
             'state' => 'NC',
             'zip' => '28601',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8573',
@@ -583,8 +540,7 @@ class LocationSeeder extends Seeder
             'city' => 'Cornelius',
             'state' => 'NC',
             'zip' => '28031',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8594',
@@ -596,8 +552,7 @@ class LocationSeeder extends Seeder
             'city' => 'Harrisburg',
             'state' => 'NC',
             'zip' => '28075',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8602',
@@ -609,8 +564,7 @@ class LocationSeeder extends Seeder
             'city' => 'Clover',
             'state' => 'SC',
             'zip' => '29710',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8603',
@@ -622,8 +576,7 @@ class LocationSeeder extends Seeder
             'city' => 'Spartanburg',
             'state' => 'SC',
             'zip' => '29303',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8660',
@@ -635,8 +588,7 @@ class LocationSeeder extends Seeder
             'city' => 'Kings Mtn.',
             'state' => 'NC',
             'zip' => '28086',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8661',
@@ -648,8 +600,7 @@ class LocationSeeder extends Seeder
             'city' => 'Clinton',
             'state' => 'SC',
             'zip' => '29325',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8662',
@@ -661,8 +612,7 @@ class LocationSeeder extends Seeder
             'city' => 'Marion',
             'state' => 'NC',
             'zip' => '28752',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8688',
@@ -674,8 +624,7 @@ class LocationSeeder extends Seeder
             'city' => 'Fort Mill',
             'state' => 'SC',
             'zip' => '29708',
-            'open' => false,
-            'construction' => false,
+            'status' => 'Closed',
             ],
             [
             'number' => '8717',
@@ -687,8 +636,7 @@ class LocationSeeder extends Seeder
             'city' => 'Clemson',
             'state' => 'SC',
             'zip' => '29631',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8718',
@@ -700,8 +648,7 @@ class LocationSeeder extends Seeder
             'city' => 'Mint Hill',
             'state' => 'NC',
             'zip' => '28277',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8719',
@@ -713,8 +660,7 @@ class LocationSeeder extends Seeder
             'city' => 'Piedmont',
             'state' => 'SC',
             'zip' => '29673',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8748',
@@ -726,8 +672,7 @@ class LocationSeeder extends Seeder
             'city' => 'Roebuck',
             'state' => 'SC',
             'zip' => '29376',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8760',
@@ -739,8 +684,7 @@ class LocationSeeder extends Seeder
             'city' => 'Taylorsville',
             'state' => 'NC',
             'zip' => '28681',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8775',
@@ -752,8 +696,7 @@ class LocationSeeder extends Seeder
             'city' => 'Chester',
             'state' => 'SC',
             'zip' => '29706',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8795',
@@ -765,8 +708,7 @@ class LocationSeeder extends Seeder
             'city' => 'Greenville',
             'state' => 'SC',
             'zip' => '29609',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8798',
@@ -778,8 +720,7 @@ class LocationSeeder extends Seeder
             'city' => 'Charlotte',
             'state' => 'NC',
             'zip' => '28212',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8821',
@@ -791,8 +732,7 @@ class LocationSeeder extends Seeder
             'city' => 'Waxhaw',
             'state' => 'NC',
             'zip' => '28173',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8823',
@@ -804,8 +744,7 @@ class LocationSeeder extends Seeder
             'city' => 'Union',
             'state' => 'SC',
             'zip' => '29379',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8970',
@@ -817,8 +756,7 @@ class LocationSeeder extends Seeder
             'city' => 'York',
             'state' => 'SC',
             'zip' => '29745',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8980',
@@ -830,8 +768,7 @@ class LocationSeeder extends Seeder
             'city' => 'Morristown',
             'state' => 'TN',
             'zip' => '37813',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '8987',
@@ -843,8 +780,7 @@ class LocationSeeder extends Seeder
             'city' => 'Duncan',
             'state' => 'SC',
             'zip' => '29334',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '10047',
@@ -856,8 +792,7 @@ class LocationSeeder extends Seeder
             'city' => 'Jefferson City',
             'state' => 'TN',
             'zip' => '37760',
-            'open' => true,
-            'construction' => false,
+            'status' => 'Open',
             ],
             [
             'number' => '10146',
@@ -869,8 +804,7 @@ class LocationSeeder extends Seeder
             'city' => 'Sevierville',
             'state' => 'TN',
             'zip' => '37862',
-            'open' => false,
-            'construction' => true
+            'status' => 'Construction',
             ]
         ]);
     }
