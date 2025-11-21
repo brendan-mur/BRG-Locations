@@ -27,8 +27,7 @@ function StoreList() {
           storeZip={loc.zip}
           storeGPSLat={loc.latitude}
           storeGPSLong={loc.longitude}
-          storeConstruction={loc.construction}
-          storeOpen={loc.open}
+          storeStatus={loc.status}
           isActive={false}
         />
       ))}

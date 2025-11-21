@@ -22,8 +22,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('state', 2);
             $table->string('zip', 10);
-            $table->boolean('open')->default(false);
-            $table->boolean('construction')->default(false); 
+            $table->string('status')->default('Construction');
             $table->timestamps();
         });
     }

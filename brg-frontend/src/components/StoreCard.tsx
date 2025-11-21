@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { mapSelector } from '../utils/MapSelector';
-import { underConstruction } from '../utils/Construction';
 import { showPhone } from '../utils/ShowPhone';
-import { storeClosed } from '../utils/StoreClosed';
+import { showStoreIcon } from '../utils/ShowStoreIcon';
 
 type StoreCardProps = {
   storeNumber: string;
@@ -14,8 +13,7 @@ type StoreCardProps = {
   storeZip: string;
   storeGPSLat: string;
   storeGPSLong: string;
-  storeConstruction: boolean;
-  storeOpen: boolean;
+  storeStatus: 'Open' | 'Closed' | 'Construction';
   isActive: boolean;
 };
 
@@ -29,8 +27,7 @@ function LocationCard({
   storeZip,
   storeGPSLat,
   storeGPSLong,
-  storeConstruction,
-  storeOpen,
+  storeStatus,
   isActive,
 }: StoreCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -41,8 +38,8 @@ function LocationCard({
     }
   }, [isActive]);
 
-  const storeActive: boolean = !storeOpen && !storeConstruction ? false : true;
-  const storeActiveClass: string = storeActive ? '' : 'store-closed';
+  const storeActiveClass: string =
+    storeStatus === 'Closed' ? 'store-closed' : '';
   return (
     <div
       id={storeNumber}
@@ -51,8 +48,7 @@ function LocationCard({
       tabIndex={-1} // Make div focusable
     >
       <div className="store-identification">
-        {storeClosed(storeActive)}
-        {underConstruction(storeConstruction)}
+        {showStoreIcon(storeStatus)}
         <div className="store-number">{storeNumber}</div>
         <div className="store-name">{storeName}</div>
       </div>

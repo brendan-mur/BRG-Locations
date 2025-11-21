@@ -8,6 +8,5 @@ export type Store = {
   city: string;
   state: string;
   zip: string;
-  construction: boolean;
-  open: boolean;
+  status: 'Open' | 'Closed' | 'Construction';
 };
